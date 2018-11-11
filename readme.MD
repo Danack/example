@@ -7,6 +7,33 @@ This is an example docker box for a Slim application using Auryn.
 There is quite a bit of stuff I'm going to add to it, so currently these instructions are placeholder.
 
 
+
+## Quickstart
+
+
+1. Get Docker community edition and start it
+
+2. Allow file mounts to work
+
+* Click the whale icon for docker at the edge of your screen. 
+* Under 'File Sharing' add a path that you will check the project out into e.g /projects
+
+
+3. Checkout the project and start it.
+
+```
+git clone https://github.com/Danack/example
+cd example
+docker-compose build
+docker-compose up --build --abort-on-container-exit
+
+```
+
+Wait for text to stop scrolling by...
+
+4. Go to http://local.app.basereality.com/ in your browser.
+
+
 ## Docker commands
 
 After checking out the repo, building the images
