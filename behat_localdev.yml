@@ -1,0 +1,27 @@
+default:
+  autoload:
+    '': %paths.base%/lib
+    # Add any code for contexts here
+  suites:
+    default: &default
+      paths:
+        - %paths.base%/tests/features
+      contexts:
+        - Example\Behat\SiteContext
+      filters:
+        tags: "~@wip"
+  extensions:
+    Behat\MinkExtension:
+      base_url: "http://local.basereality.com"
+      browser_name: chrome
+      javascript_session: selenium2
+      selenium2:
+        wd_host: "http://local.basereality.com:4444/wd/hub"
+        capabilities:
+          marionette: true
+          browser: chrome
+          version: 2.9
+          extra_capabilities:
+            chromeOptions:
+              args:
+                - "--user-agent=BaseRealityTester"

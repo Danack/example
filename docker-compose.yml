@@ -1,0 +1,78 @@
+version: "3"
+services:
+  selenium-chrome:
+    image: selenium/standalone-chrome-debug
+    volumes:
+      - /dev/shm:/dev/shm
+    ports:
+      - "4444:4444"
+      - "5900:5900"
+    environment:
+      VNC_NO_PASSWORD: 1
+      SCREEN_WIDTH: 1080
+      SCREEN_HEIGHT: 1080
+  db:
+    image: mysql:5.7
+    environment:
+      MYSQL_ROOT_PASSWORD: LuwCDE97zppvQhzP
+      MYSQL_DATABASE: example
+      MYSQL_USER: example
+      MYSQL_PASSWORD: D9cACV8Pue3CvM93
+    ports:
+      - "3306:3306"
+    volumes:
+      - ./docker/mysql/config/my.cnf:/etc/mysql/my.cnf
+      - ./data/mysql:/var/lib/mysql
+      - ./data/mysql_import:/docker-entrypoint-initdb.d
+  php_backend:
+    build: docker/php_backend
+    image: example_php_backend:latest
+    depends_on:
+      - db
+      - redis
+    volumes:
+      - .:/var/www
+      # - ./logs/php_backend:/var/log/api
+  php_backend_debug:
+    build: docker/php_backend_debug
+#    image: example_php_backend_debug:latest
+    depends_on:
+      - db
+      - redis
+      - php_backend
+    volumes:
+      - .:/var/www
+  redis:
+    image: redis:4.0.6
+    ports:
+      - "6379:6379"
+    volumes:
+      - .:/var/www
+    command: ["redis-server", "/var/www/docker/redis/config/redis.conf"]
+#  varnish:
+#    build: docker/varnish
+
+#    command: ["/usr/local/bin/start_varnish.sh"]
+#    depends_on:
+#      - web_server
+#    environment:
+#      CACHE_SIZE: 128m
+#    ports:
+#      - "80:80"
+#    volumes:
+#      - ./config/localdev/varnish:/etc/varnish
+#      - ./:/var/app
+  nginx:
+    build: docker/nginx
+    # image: example_web_server:latest
+    depends_on:
+      - db
+      - redis
+      - php_backend
+      - php_backend_debug
+    volumes:
+      - .:/var/www
+    ports:
+      - "80:80"
+      - "8000:8000"
+      - "8001:8001"

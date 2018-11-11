@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+
+
+
+
+
+  <title>Example site</title>
+
+
+</head>
+<body>
+<div id="main-wrapper">
+  {% block page_body %}
+    Page body goes here. Did you accidentally call base.html by mistake?
+  {% endblock %}
+
+</div>
+</body>
+
+{{ memory_debug() }}
+</html>
