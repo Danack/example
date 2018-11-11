@@ -1,0 +1,17 @@
+{
+    "timeout": 10,
+    "source": {
+        "directories": [
+            "lib"
+        ],
+        "excludes": [
+            "*birke*"
+        ]
+    },
+    "phpUnit": {
+        "configDir": ".\/test"
+    },
+    "logs": {
+        "text": "infection-log.txt"
+    }
+}

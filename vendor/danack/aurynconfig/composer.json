@@ -1,0 +1,32 @@
+{
+    "name": "danack/aurynconfig",
+    "description": "",
+    "keywords": ["DI", "Auryn", "config"],
+
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Dan Ackroyd",
+            "email": "Danack@basereality.com",
+            "homepage": "http://www.basereality.com"
+        }
+    ],
+    "autoload": {
+        "psr-0": {
+            "AurynConfig": "src/"
+        }
+    },
+    "autoload-dev": {
+        "psr-0": {
+            "AurynConfigTest": "test/"
+        }
+    },
+    "require-dev": {
+        "mockery/mockery": "0.9.5",
+        "phpunit/phpunit": "4.4.5",
+        "squizlabs/php_codesniffer": "^2.0.0"
+    },
+    "require":{
+        "rdlowrey/auryn": "^1.4"
+    }
+}

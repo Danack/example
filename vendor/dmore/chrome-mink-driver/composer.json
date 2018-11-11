@@ -1,0 +1,43 @@
+{
+    "repositories": [
+        {
+            "type": "git",
+            "url": "https://github.com/adorin/driver-testsuite.git"
+        }
+    ],
+    "name": "dmore/chrome-mink-driver",
+    "description": "Mink driver for controlling chrome without selenium",
+    "type": "library",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Dorian More",
+            "email": "doriancmore@gmail.com"
+        }
+    ],
+    "autoload": {
+        "psr-4": {
+            "DMore\\ChromeDriver\\": "src/"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "DMore\\ChromeDriverTests\\": "tests/"
+        }
+    },
+    "minimum-stability": "stable",
+    "require-dev": {
+        "phpunit/phpunit": "^5.0.0",
+        "mink/driver-testsuite": "dev-master"
+    },
+    "require": {
+        "ext-curl": "*",
+        "textalk/websocket": "^1.2.0",
+        "behat/mink": "^1.7"
+    },
+    "extra": {
+        "branch-alias": {
+            "dev-master": "2.0.x-dev"
+        }
+    }
+}

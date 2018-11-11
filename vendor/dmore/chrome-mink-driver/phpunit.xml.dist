@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<phpunit colors="true" bootstrap="vendor/autoload.php">
+    <testsuites>
+        <testsuite name="Driver test suite">
+            <directory>tests</directory>
+            <directory>vendor/mink/driver-testsuite/tests</directory>
+        </testsuite>
+    </testsuites>
+
+    <php>
+        <server name="WEB_FIXTURES_HOST" value="http://localhost/" />
+        <server name="CHROME_URL" value="http://localhost:9222" />
+        <var name="driver_config_factory" value="DMore\ChromeDriverTests\ChromeDriverConfig::getInstance" />
+    </php>
+
+    <filter>
+        <whitelist>
+            <directory>./src/Behat/Mink/Driver</directory>
+        </whitelist>
+    </filter>
+</phpunit>

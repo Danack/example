@@ -1,0 +1,14 @@
+{
+    "timeout": 10,
+    "source": {
+        "directories": [
+            "lib"
+        ]
+    },
+    "phpUnit": {
+        "configDir": "test"
+    },
+    "logs": {
+        "text": "infection-log.txt"
+    }
+}

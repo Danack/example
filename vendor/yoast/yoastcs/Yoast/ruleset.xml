@@ -1,0 +1,87 @@
+<?xml version="1.0"?>
+<ruleset name="Yoast" namespace="YoastCS\Yoast">
+	<description>Yoast Coding Standards</description>
+
+	<!--
+	#############################################################################
+	SNIFF AGAINST THE WordPress RULESET
+	Exclude a few select sniffs/errorcodes for specific reasons and
+	add configuration for a sniff.
+	#############################################################################
+	-->
+	<rule ref="WordPress">
+		<exclude name="Squiz.WhiteSpace.SuperfluousWhitespace.EmptyLines"/>
+
+		<!-- No need for this sniff as every Yoast travis script includes linting all files. -->
+		<exclude name="Generic.PHP.Syntax"/>
+
+		<!-- Excluded in favour of the YoastCS native "else on new line" sniff. -->
+		<exclude name="Squiz.ControlStructures.ControlSignature.SpaceAfterCloseBrace"/>
+
+		<!-- Excluded in favour of the YoastCS native Filename sniff. -->
+		<exclude name="WordPress.Files.FileName"/>
+
+		<!-- Demanding Yoda conditions is stupid. -->
+		<exclude name="WordPress.PHP.YodaConditions"/>
+
+		<!-- A while loop is the only valid control structure where an assignment can be justified. -->
+		<exclude name="WordPress.CodeAnalysis.AssignmentInCondition.FoundInWhileCondition"/>
+
+		<!-- If a conscious choice has been made for a non-strict comparison, that's ok.
+			 I.e. when `strict` has been explicitely set to `false` in an array comparison,
+			 it will be allowed. -->
+		<exclude name="WordPress.PHP.StrictInArray.FoundNonStrictFalse"/>
+	</rule>
+
+	<rule ref="WordPress.Arrays.MultipleStatementAlignment">
+		<properties>
+			<!-- No need to adjust alignment of large arrays when the item with the largest key is removed. -->
+			<property name="exact" value="false"/>
+			<!-- Don't align multi-line items if ALL items in the array are multi-line. -->
+			<property name="alignMultilineItems" value="!=100"/>
+			<!-- Array Assignment operator should always be on the same line as the array key. -->
+			<property name="ignoreNewlines" value="false"/>
+		</properties>
+	</rule>
+
+
+	<!--
+	#############################################################################
+	SNIFF FOR PHP CROSS-VERSION COMPATIBILITY
+	#############################################################################
+	-->
+	<config name="testVersion" value="5.2-"/>
+	<rule ref="PHPCompatibilityWP"/>
+
+
+	<!--
+	#############################################################################
+	ADD SOME SPECIFIC EXTRA SNIFFS
+	These may make it into WPCS at some point. If so, they can be removed here.
+	#############################################################################
+	-->
+	<!-- Error prevention: Make sure the condition in a inline if declaration is bracketed -->
+	<rule ref="Squiz.ControlStructures.InlineIfDeclaration"/>
+
+	<!-- Error prevention: Make sure arithmetics are bracketed -->
+	<rule ref="Squiz.Formatting.OperatorBracket.MissingBrackets"/>
+
+	<!-- CS: PHP type casts and type declarations should be in short form and lowercase. -->
+	<!-- These sniffs will be most likely be added to WPCS 2.0 and can then be removed from this ruleset. -->
+	<rule ref="Generic.PHP.LowerCaseType"/>
+	<rule ref="PSR12.Keywords.ShortFormTypeKeywords"/>
+
+	<!-- CS: no blank line between the content of a function and a function close brace.-->
+	<rule ref="PSR2.Methods.FunctionClosingBrace"/>
+
+	<!-- ##### Documentation Sniffs vs empty index files ##### -->
+
+	<!-- Exclude the 'empty' index files from some documentation checks -->
+	<rule ref="Squiz.Commenting.FileComment">
+		<exclude-pattern>*/index\.php</exclude-pattern>
+	</rule>
+	<rule ref="Squiz.Commenting.InlineComment.NoSpaceBefore">
+		<exclude-pattern>*/index\.php</exclude-pattern>
+	</rule>
+
+</ruleset>

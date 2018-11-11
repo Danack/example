@@ -1,0 +1,26 @@
+/* footer {
+    background-color: red;
+} */
+
+
+.bs-sidenav {
+    margin-top: 24px;
+}
+
+
+.code-block-filename::before {
+    content: "File: ";
+}
+
+h2 {
+    font-size: 24px;
+}
+
+h1 {
+    margin-bottom: 24px;
+}
+
+
+.navbar {
+    border-radius: 0px;
+}

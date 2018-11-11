@@ -1,0 +1,47 @@
+{# Import the theme's layout. #}
+{% extends "!layout.html" %}
+
+{# Custom CSS overrides #}
+{% set bootswatch_css_custom = ['_static/my-styles.css'] %}
+
+
+{%- block footer %}
+<footer class="footer">
+    <div class="container">
+        <p class="pull-right">
+            <a href="https://github.com/Danack/Console/issues" style="margin-right: 30px">
+                Report an issue
+            </a>
+
+            {% include "footerRelations.html" %}
+            
+            <!-- <a href="#">Back to top</a> -->
+
+            {% if theme_source_link_position == "footer" %}
+            <br/>
+            {% include "sourcelink.html" %}
+            {% endif %}
+        </p>
+        <p>
+            {%- if show_copyright %}
+            {%- if hasdoc('copyright') %}
+            {% trans path=pathto('copyright'), copyright=copyright|e %}&copy; <a href="{{ path }}">Copyright</a> {{ copyright }}.{% endtrans %}<br/>
+            {%- else %}
+            {% trans copyright=copyright|e %}&copy; Copyright {{ copyright }}.{% endtrans %}<br/>
+            {%- endif %}
+            {%- endif %}
+            {%- if last_updated %}
+            {% trans last_updated=last_updated|e %}Last updated on {{ last_updated }}.{% endtrans %}<br/>
+            {%- endif %}
+            {%- if show_sphinx %}
+            {% trans sphinx_version=sphinx_version|e %}Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> {{ sphinx_version }}.{% endtrans %}<br/>
+            {%- endif %}
+        </p>
+    </div>
+</footer>
+{%- endblock %}
+
+{% block header %}
+{{ super() }}
+{% endblock %}
+

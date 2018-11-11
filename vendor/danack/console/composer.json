@@ -1,0 +1,50 @@
+{
+    "name": "danack/console",
+    "type": "library",
+    "description": "Refactored Symfony Console Component",
+    "keywords": ["console", "cli"],
+    "homepage": "http://console.basereality.com/",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Danack",
+            "email": "Danack@basereality.com"
+        },
+        {
+            "name": "Fabien Potencier",
+            "email": "fabien@symfony.com"
+        },
+        {
+            "name": "Symfony Community",
+            "homepage": "http://symfony.com/contributors"
+        }
+    ],
+    "repositories": [
+        {
+            "type": "vcs",
+            "url": "https://github.com/danack/Auryn/"
+        }
+    ],
+    
+    "require": {
+        "php": ">=5.3.3"
+    },
+    "require-dev": {
+        "symfony/process": "~2.1",
+        "psr/log": "~1.0",
+        "danack/auryn": "0.14.1",
+        "phpunit/phpunit": "4.2.6"
+    },
+    "autoload": {
+        "psr-0": { "Danack\\Console\\": "lib/" }
+    },
+    "autoload-dev": {
+        "psr-4": { "Danack\\Console\\Tests\\": "Tests/" }
+    },
+    
+    "extra": {
+        "branch-alias": {
+            "dev-master": "2.6-dev"
+        }
+    }
+}

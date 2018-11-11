@@ -1,0 +1,33 @@
+{
+
+  "name": "danack/params",
+  "description": "Converts user input into correctly typed parameters",
+  "license": "MIT",
+  "require": {
+    "danack/var-map": "^0.6.0"
+  },
+  "require-dev": {
+    "infection/infection": "^0.8.2",
+    "phpunit/phpunit": "^6.5.8",
+    "psr/http-message": "^1.0",
+    "squizlabs/php_codesniffer": "^2.8",
+    "yoast/yoastcs": "0.4.2"
+  },
+  "autoload": {
+    "psr-0": {
+      "Params\\": "lib/",
+      "ParamsExample\\": "lib/"
+    }
+  },
+  "autoload-dev": {
+    "psr-0": {
+      "ParamsTest\\": "test/"
+    }
+  },
+  "config": {
+    "preferred-install": {
+      "*": "dist"
+    }
+  },
+  "prefer-stable": true
+}
