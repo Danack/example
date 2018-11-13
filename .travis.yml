@@ -26,5 +26,3 @@ script:
   - docker-compose exec php_backend sh -c "php vendor/bin/phinx seed:run"
   # Run tests
   # - docker-compose exec web sh -c "composer test"
-  # Build cli container
-  # - docker build -t "bkuhl/laravel-starter:cli" -f infrastructure/cli/Dockerfile .
