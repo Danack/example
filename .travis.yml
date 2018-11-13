@@ -1,0 +1,30 @@
+sudo: required
+services:
+  - docker
+
+before_install:
+  - docker -v
+  # Use the env config
+  # - cp .env.example .env
+  # Stop the postgres instance travis sets up automatically
+  - sudo /etc/init.d/postgresql stop
+  - sudo service mysql stop
+  # set env vars in the build settings to interact with repositories
+  # see https://docs.travis-ci.com/user/environment-variables/#Defining-Variables-in-Repository-Settings
+  # - docker login -u="$DOCKER_USERNAME" -p="$DOCKER_PASSWORD"
+install:
+  # Start the docker stuff
+  - docker-compose build
+  - docker-compose up -d
+  - sleep 10
+  - echo "shamoan"
+  # Install dev php dependencies
+  # - docker-compose exec web sh -c "composer install --no-interaction --prefer-dist"
+script:
+  # Seed database
+  - docker-compose exec php_backend sh -c "php vendor/bin/phinx migrate"
+  - docker-compose exec php_backend sh -c "php vendor/bin/phinx seed:run"
+  # Run tests
+  # - docker-compose exec web sh -c "composer test"
+  # Build cli container
+  # - docker build -t "bkuhl/laravel-starter:cli" -f infrastructure/cli/Dockerfile .

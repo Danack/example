@@ -10,6 +10,6 @@ environments:
         host: db
         name: example
         user: example
-        pass: LuwCDE97zppvQhzP
+        pass: D9cACV8Pue3CvM93
         port: 3306
         charset: utf8
