@@ -11,12 +11,17 @@ function injectionParams()
         \Twig_Environment::class,
         \Auryn\Injector::class,
         \Birke\Rememberme\Authenticator::class,
+        Doctrine\ORM\EntityManager::class
     ];
 
     // Alias interfaces (or classes) to the actual types that should be used
     // where they are required.
     $aliases = [
         \Example\Route\Routes::class => \Example\Route\AppRoutes::class,
+        Example\Repo\BookListRepo\BookListRepo::class => Example\Repo\BookListRepo\DoctrineBookListRepo::class,
+
+
+
     ];
 
     // Delegate the creation of types to callables.
@@ -25,6 +30,7 @@ function injectionParams()
         \PDO::class => 'createPDO',
         \Slim\App::class => 'createAppForSite',
         \Twig_Environment::class => 'createTwigForSite',
+        Doctrine\ORM\EntityManager::class => 'createDoctrineEntityManager'
     ];
 
 

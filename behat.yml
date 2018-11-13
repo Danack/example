@@ -5,14 +5,14 @@ default:
   suites:
     default: &default
       paths:
-        - %paths.base%/tests/features
+        - %paths.base%/test/features
       contexts:
         - Example\Behat\SiteContext
       filters:
         tags: "~@wip"
   extensions:
     Behat\MinkExtension:
-      base_url: "http://local.basereality.com"
+      base_url: "http://local.app.basereality.com"
       browser_name: chrome
       javascript_session: selenium2
       selenium2:

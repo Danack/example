@@ -112,45 +112,6 @@ function json_decode_safe($json)
     throw new \Example\Exception\JsonException("Error decoding JSON: " . json_last_error_msg());
 }
 
-/**
- * @return \Doctrine\ORM\EntityManager
- */
-function createDoctrineEntityManager()
-{
-    $config = getConfig(\Example\Config::EXAMPLE_DATABASE_INFO);
-
-    $connectionParams = array(
-        'dbname' => $config['schema'],
-        'user' => $config['username'],
-        'password' => $config['password'],
-        'host' => $config['host'],
-        'driver' => 'pdo_mysql',
-    );
-
-    $config = \Doctrine\ORM\Tools\Setup::createAnnotationMetadataConfiguration(
-        [__DIR__ . "/Example/Model"],
-        true,
-        __DIR__ . "/../var/doctrine"
-    );
-
-    // TODO - precompile these in the build step.
-    // $config->setAutoGenerateProxyClasses(\Doctrine\Common\Proxy\AbstractProxyFactory::AUTOGENERATE_ALWAYS);
-
-    // obtaining the entity manager
-    return \Doctrine\ORM\EntityManager::create($connectionParams, $config);
-}
-
-
-/**
- * @param Redis $redis
- * @return \Birke\Rememberme\Authenticator
- */
-function createRememberMeAuthenticator(Redis $redis)
-{
-    $storage = new \Birke\Rememberme\Storage\RedisStorage($redis, 'rememberme_');
-
-    return new \Birke\Rememberme\Authenticator($storage);
-}
 
 
 function get_password_options()

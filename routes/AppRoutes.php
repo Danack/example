@@ -45,6 +45,7 @@ class AppRoutes implements Routes
         // This allows use to configure data per endpoint e.g. the endpoints that should be secured by
         // and api key, should call an appropriate callable.
         $routes = [
+            ['/books', 'GET', 'Example\AppController\Books::index'],
             ['/test/caught_exception', 'GET', 'Example\ApiController\Debug::testCaughtException'],
             ['/test/uncaught_exception', 'GET', 'Example\ApiController\Debug::testUncaughtException'],
 

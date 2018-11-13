@@ -20,7 +20,6 @@ install:
   - docker-compose build
   - docker-compose up -d
   - sleep 10
-  - echo "shamoan"
   # Install dev php dependencies
   # - docker-compose exec web sh -c "composer install --no-interaction --prefer-dist"
 script:
@@ -29,3 +28,6 @@ script:
   - docker-compose exec php_backend sh -c "php vendor/bin/phinx seed:run"
   # Run tests
   # - docker-compose exec web sh -c "composer test"
+
+notifications:
+  email: false

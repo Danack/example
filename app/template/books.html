@@ -1,0 +1,10 @@
+{% extends "base.html" %}
+
+{% block page_body %}
+  <h1>Book list</h1>
+
+{% set bookList = inject('Example\\Component\\BookList') %}
+{{ bookList.render()|raw }}
+
+
+{% endblock %}

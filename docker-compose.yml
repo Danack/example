@@ -1,5 +1,6 @@
 version: "3"
 services:
+
   selenium-chrome:
     image: selenium/standalone-chrome-debug
     volumes:
@@ -7,6 +8,10 @@ services:
     ports:
       - "4444:4444"
       - "5900:5900"
+    dns:
+      - 8.8.8.8
+      - 4.4.4.4
+    #  - 192.168.9.45
     environment:
       VNC_NO_PASSWORD: 1
       SCREEN_WIDTH: 1080
@@ -76,3 +81,7 @@ services:
       - "80:80"
       - "8000:8000"
       - "8001:8001"
+#    networks:
+#      default:
+#        aliases:
+#          - local.app.basereality.com
