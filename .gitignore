@@ -12,7 +12,7 @@
 /app/build
 /admin/build
 
-config.php
+# /config.php
 
 # misc
 .DS_Store
