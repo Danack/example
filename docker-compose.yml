@@ -81,6 +81,9 @@ services:
       - "80:80"
       - "8000:8000"
       - "8001:8001"
+#      dns_search:
+#        - dc1.example.com
+#        - dc2.example.com
 #    networks:
 #      default:
 #        aliases:
