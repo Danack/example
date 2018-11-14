@@ -14,7 +14,7 @@ before_install:
   - sudo service mysql stop
 
   # Create a loop
-  - ifconfig lo:0 10.254.254.254 netmask 255.0.0.0 up
+  - sudo ifconfig lo:0 10.254.254.254 netmask 255.0.0.0 up
 install:
   # Start the docker stuff
   - docker-compose build
