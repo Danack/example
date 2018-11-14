@@ -7,20 +7,11 @@ services:
 
 before_install:
   - docker -v
-  # Use the env config
-  # - cp .env.example .env
   # Stop the postgres instance travis sets up automatically
   - sudo /etc/init.d/postgresql stop
   - sudo service mysql stop
-
-  # Create a loop
-  - sudo ifconfig
+  # Create a loopback address
   - sudo ip addr add 10.254.254.254/32 dev lo
-  # - sudo ifconfig lo 10.254.254.254 netmask 255.0.0.0 up
-#  lo        Link encap:Local Loopback
-#           inet addr:127.0.0.1  Mask:255.0.0.0
-#          UP LOOPBACK RUNNING  MTU:65536  Metric:1
-
 
 install:
   # Start the docker stuff
@@ -30,13 +21,11 @@ install:
   # Install dev php dependencies
   # - docker-compose exec web sh -c "composer install --no-interaction --prefer-dist"
 script:
-  # Seed database
   - docker-compose exec php_backend sh -c "php vendor/bin/phinx migrate"
   - docker-compose exec php_backend sh -c "php vendor/bin/phinx seed:run"
+  # Make sure site is working at least a bit.
   - curl http://local.app.basereality.com
   - docker-compose exec php_backend sh -c "php vendor/bin/behat --config=./behat.yml --colors --stop-on-failure"
-  # Run tests
-  # - docker-compose exec web sh -c "composer test"
 
 notifications:
   email: false

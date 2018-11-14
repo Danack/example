@@ -15,7 +15,6 @@ function fillResponseData(ResponseInterface $response, array $data, int $statusC
 
     $response = $response->withStatus($builtResponse->getStatus());
     foreach ($builtResponse->getHeaders() as $key => $value) {
-        /** @var $response \Psr\Http\Message\ResponseInterface */
         $response = $response->withAddedHeader($key, $value);
     }
 

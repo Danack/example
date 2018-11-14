@@ -1,0 +1,14 @@
+parameters:
+  bootstrap: null
+  autoload_files:
+    - injectionParams/cli.php
+    - lib/cli_functions.php
+    - lib/exception_mappers_cli.php
+    - lib/exception_mappers_http.php
+    - lib/factories.php
+    - lib/functions.php
+    - lib/slim_functions.php
+    - lib/twig_functions.php
+  excludes_analyse:
+    - *lib/birke/*
+    - *injectionParams/*

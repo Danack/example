@@ -37,7 +37,22 @@ class CLIFunction
         $lastError = error_get_last();
 
         if ($lastError !== null && in_array($lastError['type'], $fatals) === true) {
-            extract($lastError);
+
+
+            $message = 'unknown';
+            $file = 'unknown';
+            $line = 'unknown';
+
+            if (array_key_exists('message', $lastError) === true) {
+                $message = $lastError['message'];
+            }
+            if (array_key_exists('file', $lastError) === true) {
+                $file = $lastError['file'];
+            }
+            if (array_key_exists('line', $lastError) === true) {
+                $line = $lastError['line'];
+            }
+
             $errorMessage = sprintf("Fatal error: %s in %s on line %d", $message, $file, $line);
 
             error_log($errorMessage);

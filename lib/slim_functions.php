@@ -24,7 +24,6 @@ function exampleResponseMapper(\Example\Response\Response $builtResponse, Respon
 
     $response = $response->withStatus($status, $reasonPhrase);
     foreach ($builtResponse->getHeaders() as $key => $value) {
-        /** @var $response \Psr\Http\Message\ResponseInterface */
         $response = $response->withAddedHeader($key, $value);
     }
     $response->getBody()->write($builtResponse->getBody());

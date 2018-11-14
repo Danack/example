@@ -2,10 +2,16 @@
 
 # Example box
 
-This is an example docker box for a Slim application using Auryn. 
+This project is an example of how to use various pieces of technology: 
 
-There is quite a bit of stuff I'm going to add to it, so currently these instructions are placeholder.
+* Docker for local development
+* Slim framework with Auryn DI
+* Behat tests
+* React + webpack
+* Xdebug
 
+
+Please refer to the individual readme files for details of the
 
 
 ## Quickstart

@@ -7,7 +7,7 @@ function runSomething(callable $callable, $params, $aliases, $body)
 {
     $injector = new Auryn\Injector();
 
-    /** @var $cliInjectionParams \AurynConfig\InjectionParams*/
+    /** @var \AurynConfig\InjectionParams $cliInjectionParams */
     $cliInjectionParams = require __DIR__ . "/../injectionParams/cli.php";
 
     $cliInjectionParams->mergeSharedObjects($aliases);

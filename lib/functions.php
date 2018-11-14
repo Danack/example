@@ -188,7 +188,9 @@ function convertToValue($name, $value)
     if ($value === null) {
         return null;
     }
-    if (is_object($value) === true && is_callable([$value, 'toArray'])) {
+
+    $callable = [$value, 'toArray'];
+    if (is_object($value) === true && is_callable($callable)) {
         return $value->toArray();
     }
     if (is_object($value) === true && $value instanceof \DateTime) {

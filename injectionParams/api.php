@@ -2,7 +2,7 @@
 
 use AurynConfig\InjectionParams;
 
-function injectionParams()
+function injectionParams() : InjectionParams
 {
     // These classes will only be created once by the injector.
     $shares = [

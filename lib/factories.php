@@ -51,7 +51,7 @@ function createPDO()
     );
 
     try {
-        $pdo = new \Pdo($string, $config['username'], $config['password'], array(
+        $pdo = new \PDO($string, $config['username'], $config['password'], array(
             PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION,
             PDO::ATTR_EMULATE_PREPARES => false,
             \PDO::ATTR_DEFAULT_FETCH_MODE => \PDO::FETCH_ASSOC,
