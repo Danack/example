@@ -12,9 +12,9 @@ before_install:
   # Stop the postgres instance travis sets up automatically
   - sudo /etc/init.d/postgresql stop
   - sudo service mysql stop
-  # set env vars in the build settings to interact with repositories
-  # see https://docs.travis-ci.com/user/environment-variables/#Defining-Variables-in-Repository-Settings
-  # - docker login -u="$DOCKER_USERNAME" -p="$DOCKER_PASSWORD"
+
+  # Create a loop
+  - ifconfig lo:0 10.254.254.254 netmask 255.0.0.0 up
 install:
   # Start the docker stuff
   - docker-compose build
@@ -26,6 +26,7 @@ script:
   # Seed database
   - docker-compose exec php_backend sh -c "php vendor/bin/phinx migrate"
   - docker-compose exec php_backend sh -c "php vendor/bin/phinx seed:run"
+  - curl http://local.app.basereality.com
   - docker-compose exec php_backend sh -c "php vendor/bin/behat --config=./behat.yml --colors --stop-on-failure"
   # Run tests
   # - docker-compose exec web sh -c "composer test"
