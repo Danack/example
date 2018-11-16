@@ -88,3 +88,9 @@ services:
 #      default:
 #        aliases:
 #          - local.app.basereality.com
+
+
+# https://rskuipers.com/entry/file-permissions-with-docker-on-linux
+# fpm:
+    # For Linux users only (UID of your user)
+ #   user: "1000"
