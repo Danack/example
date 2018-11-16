@@ -14,6 +14,14 @@ e.g. http://local.app.basereality.com:8001/
 The recommended work flow is to usually use the non-xdebug container when working (i.e. make requests to the domain name without the port specifiec -  http://local.app.basereality.com/) and then when a problem is encountered that needs some debugging, add port 8001 to the URL, so that xdebug is available straight away.
 
 
+## Xdebug quickstart experiment
+
+I've currently committed the xdebug settings which are contained in the file .idea/workspace.xml
+
+This means that xdebug should work out of the box - the only thing you might need to do is set a breakpoint.
+
+Alternatively, the instructions for setting up xdebug from scratch below.
+
 ## How to setup xdebug with the example project
 
 * Click + to add new "PHP Web page"
