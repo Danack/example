@@ -1,31 +1,34 @@
-
-
 # Example box
 
-This project is an example of how to use various pieces of technology: 
+This project is an example of how to use various pieces of technology:
 
-* Docker for local development
-* Slim framework with Auryn DI
-* Behat tests
-* React + webpack
 * Xdebug
-
-
-Please refer to the individual readme files for details of the
+* Docker for local development - docs still to do.
+* Slim framework with Auryn DI - docs still to do.
+* Behat tests - docs still to do.
+* React + webpack - docs still to do.
 
 
 ## Quickstart
 
-
 1. Get Docker community edition and start it
 
-2. Allow file mounts to work
+2. Allow file mounts to work:
 
 * Click the whale icon for docker at the edge of your screen. 
 * Under 'File Sharing' add a path that you will check the project out into e.g /projects
 
+3. Setup loopback address
 
-3. Checkout the project and start it.
+Setting up a loopback address allows an local IP address to work both inside and outside the docker containers. It also mostly avoids the need to touch docker networking.
+
+* OSX - Copy the file ./docker/com.ralphschindler.docker_10254_alias.plist to /Library/LaunchDaemons/com.ralphschindler.docker_10254_alias.plist
+* Linux - PRs welcome!
+* Windows - PRs welcome!
+
+You can test it is working by running `ping 10.254.254.254` on the command line.
+
+4. Checkout the project and start it.
 
 ```
 git clone https://github.com/Danack/example
@@ -37,7 +40,7 @@ docker-compose up --build --abort-on-container-exit
 
 Wait for text to stop scrolling by...
 
-4. Go to http://local.app.basereality.com/ in your browser.
+5. Go to http://local.app.basereality.com/ in your browser.
 
 
 ## Docker commands
@@ -87,11 +90,13 @@ docker exec -it example_web_admin_1 bash
 ```
 
 
-
 # Top level concepts
 
+To help people understand the layout of the code of the application, here are some descriptions of top level concepts used in the project.
 
 ## Environments
+
+Most real projects have different aspects to them. For this example project we have:
 
 * App - the actual application itself. 
 * Admin - the admin site that administers the application.
@@ -101,24 +106,8 @@ docker exec -it example_web_admin_1 bash
 
 ## Routes
 
-All of the routes are in routes directory.
+All of the routes are in routes directory. The routes for each environment are specified in the appropriate file.
 
 ## Injection parameters
 
 All of the injection parameters are in the injectionParams directory. There should be one file per environment plus other files for testing.
-
-# Other stuff.
-
-
-
-## Loopback address - how to setup
-
-Copy the file ./docker/com.ralphschindler.docker_10254_alias.plist to /Library/LaunchDaemons/com.ralphschindler.docker_10254_alias.plist
-to create a nice loopback address.
-
-This allows the same IP address for the MySQL database to work both inside and outside the box.
-
-
-
-
-
