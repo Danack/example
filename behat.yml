@@ -9,7 +9,7 @@ default:
       contexts:
         - Example\Behat\SiteContext
       filters:
-        tags: "~@wip"
+        tags: "~@broken"
   extensions:
     Behat\MinkExtension:
       base_url: "http://local.app.basereality.com"

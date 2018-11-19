@@ -46,8 +46,16 @@ class AppRoutes implements Routes
         // and api key, should call an appropriate callable.
         $routes = [
             ['/books', 'GET', 'Example\AppController\Books::index'],
-            ['/test/caught_exception', 'GET', 'Example\ApiController\Debug::testCaughtException'],
-            ['/test/uncaught_exception', 'GET', 'Example\ApiController\Debug::testUncaughtException'],
+
+
+            ['/iframe/container', 'GET', 'Example\AppController\IframeExample::iframeContainer'],
+            ['/iframe/contents', 'GET', 'Example\AppController\IframeExample::iframeContents'],
+
+
+//            ['/test/caught_exception', 'GET', 'Example\AppController\Debug::testCaughtException'],
+//            ['/test/uncaught_exception', 'GET', 'Example\AppController\Debug::testUncaughtException'],
+
+
 
             ['/{any:.*}', 'GET', 'Example\AppController\Index::get'],
         ];

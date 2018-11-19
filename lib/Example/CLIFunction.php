@@ -37,8 +37,6 @@ class CLIFunction
         $lastError = error_get_last();
 
         if ($lastError !== null && in_array($lastError['type'], $fatals) === true) {
-
-
             $message = 'unknown';
             $file = 'unknown';
             $line = 'unknown';
