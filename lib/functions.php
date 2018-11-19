@@ -4,18 +4,6 @@
  * This file holds functions that are required by all environments.
  */
 
-use Auryn\Injector;
-use Psr\Http\Message\ResponseInterface;
-use Psr\Http\Message\ServerRequestInterface;
-use Zend\Diactoros\Stream;
-use Zend\Escaper\Escaper;
-use Danack\SlimAurynInvoker\RouteParams as InvokerRouteParams;
-
-use Danack\SlimAurynInvoker\SlimAurynInvokerFactory;
-use Danack\Response\StubResponse;
-use Danack\Response\StubResponseMapper;
-
-
 /**
  * @param array $indexes
  * @return mixed

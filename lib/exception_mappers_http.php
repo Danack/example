@@ -85,4 +85,3 @@ function debuggingCaughtExceptionExceptionMapper(
 
     return $response;
 }
-
