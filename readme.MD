@@ -3,11 +3,12 @@
 This project is an example of how to use various pieces of technology:
 
 * Xdebug
+* Behat tests
 * Docker for local development - docs still to do.
 * Slim framework with Auryn DI - docs still to do.
-* Behat tests - docs still to do.
 * React + webpack - docs still to do.
 
+[![Build Status](https://travis-ci.org/Danack/example.svg?branch=master)](https://travis-ci.org/Danack/example)
 
 ## Quickstart
 
