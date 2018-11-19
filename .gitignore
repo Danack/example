@@ -18,6 +18,8 @@
 .idea/*
 !.idea/php.xml
 !.idea/runConfigurations/WebDebug.xml
+!.idea/runConfigurations/runBehat_sh.xml
+!.idea/runConfigurations/runPhpStan_sh.xml
 
 # misc
 .DS_Store

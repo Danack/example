@@ -1,0 +1,13 @@
+<component name="ProjectRunConfigurationManager">
+  <configuration default="false" name="runPhpStan.sh" type="BashConfigurationType" factoryName="Bash">
+    <option name="INTERPRETER_OPTIONS" value="bash" />
+    <option name="INTERPRETER_PATH" value="/usr/bin/env" />
+    <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
+    <option name="PARENT_ENVS" value="true" />
+    <option name="SCRIPT_NAME" value="$PROJECT_DIR$/runPhpStan.sh" />
+    <option name="PARAMETERS" value="" />
+    <module name="example" />
+    <envs />
+    <method />
+  </configuration>
+</component>
