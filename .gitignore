@@ -16,7 +16,8 @@
 
 
 .idea/*
-!.idea/workspace.xml
+!.idea/php.xml
+!.idea/runConfigurations/WebDebug.xml
 
 # misc
 .DS_Store
