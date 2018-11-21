@@ -2,7 +2,7 @@
 
 # Run all tests
 
-docker-compose exec php_backend sh -c "php vendor/bin/behat --config=./behat.yml --colors --stop-on-failure"
+docker-compose exec -T php_backend sh -c "php vendor/bin/behat --config=./behat.yml --colors --stop-on-failure"
 
 
 
