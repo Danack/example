@@ -28,4 +28,3 @@ catch (\Exception $exception) {
     var_dump(get_class($exception));
     showException($exception);
 }
-

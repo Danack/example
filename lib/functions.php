@@ -387,5 +387,3 @@ function str_putcsv($dataHeaders, $dataRows)
 
     return $csv;
 }
-
-

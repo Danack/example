@@ -4,7 +4,6 @@ namespace Example\Response;
 
 use Example\Response\Response;
 
-
 class CsvDataResponse implements Response
 {
     private $headers = [];
