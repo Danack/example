@@ -3,8 +3,9 @@
 $options = [];
 
 
-// $dockerHost  = '10.254.254.254';
-$dockerHost = 'host.docker.internal';
+$dockerHost  = '10.254.254.254';
+
+// $dockerHost = 'host.docker.internal';
 
 $options['example']['database'] = [
     'schema' => 'example',
