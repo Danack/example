@@ -21,11 +21,6 @@ class ServerErrorResponse implements Response
        'Content-Type' => 'text/plain'
     ];
 
-    /**
-     * JsonResponse constructor.
-     * @param $data
-     * @param array $headers
-     */
     public function __construct(string $text, int $statusCode, array $headers = [])
     {
         $this->headers = array_merge(self::STANDARD_HEADERS, $headers);

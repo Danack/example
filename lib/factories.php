@@ -93,14 +93,6 @@ function forbidden(\Auryn\Injector $injector)
     $injector->make("Please don't use this object directly; create a more specific type to use.");
 }
 
-
-/**
- * @param \Slim\Container $container
- * @param \Auryn\Injector $injector
- * @return \Slim\App
- * @throws \Auryn\InjectionException
- * @throws \Interop\Container\Exception\ContainerException
- */
 function createAppForApi(\Slim\Container $container, \Auryn\Injector $injector)
 {
     $app = new \Slim\App($container);
@@ -196,7 +188,7 @@ function createAppForSite(\Slim\Container $container, \Auryn\Injector $injector)
     // TODO - this shouldn't be used in production.
     $container['errorHandler'] = function ($c) {
         return function ($request, $response, $exception) use ($c) {
-            /** @var $exception \Throwable */
+            /** @var \Throwable $exception */
             $text = "";
             do {
                 $text .= $exception->getMessage() . "<br/><br/>\n\n";
@@ -252,7 +244,7 @@ function createAppForAdmin(\Slim\Container $container, \Auryn\Injector $injector
     // TODO - this shouldn't be used in production.
     $container['errorHandler'] = function ($c) {
         return function ($request, $response, $exception) use ($c) {
-            /** @var $exception \Throwable */
+            /** @var \Throwable $exception */
             $text = "";
             do {
                 $text .= $exception->getMessage() . "<br/><br/>\n\n";
@@ -407,15 +399,3 @@ function createDoctrineEntityManager()
     // obtaining the entity manager
     return \Doctrine\ORM\EntityManager::create($connectionParams, $config);
 }
-
-
-///**
-// * @param Redis $redis
-// * @return \Birke\Rememberme\Authenticator
-// */
-//function createRememberMeAuthenticator(Redis $redis)
-//{
-//    $storage = new \Birke\Rememberme\Storage\RedisStorage($redis, 'rememberme_');
-//
-//    return new \Birke\Rememberme\Authenticator($storage);
-//}

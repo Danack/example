@@ -1,14 +1,12 @@
 {
     "require": {
         "airbrake/phpbrake": "^0.6.0",
-        "bryanjhv/slim-session": "^3.2",
         "danack/AurynConfig": "^0.9.1",
         "danack/console": "^2.6",
         "danack/esprintf": "^0.5.0",
         "danack/params": "^0.3.6",
         "danack/slim-auryn-invoker": "^1.1.0",
         "doctrine/orm": "v2.5.6",
-        "ezimuel/php-secure-session": "v1.0.1",
         "google/recaptcha": "^1.2",
         "hashids/hashids": "^3.0",
         "justinrainbow/json-schema": "^5.2.7",

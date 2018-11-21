@@ -24,12 +24,7 @@ class StringResponse implements Response
         return $this->headers;
     }
 
-    /**
-     * JsonResponse constructor.
-     * @param $data
-     * @param array $headers
-     */
-    public function __construct($string, array $headers = [])
+    public function __construct(string $string, array $headers = [])
     {
         $this->headers = array_merge(self::STANDARD_HEADERS, $headers);
         $this->body = $string;

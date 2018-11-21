@@ -22,10 +22,10 @@ class HtmlUncachableResponse implements Response
 
     /**
      * HtmlResponse constructor.
-     * @param $html
+     * @param string $html
      * @param array $headers
      */
-    public function __construct($html, array $headers = [])
+    public function __construct(string $html, array $headers = [])
     {
         $standardHeaders = [
             'Content-Type' => 'text/html',

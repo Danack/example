@@ -44,7 +44,8 @@ function errorLogException(\Throwable $exception)
     do {
         $text .= get_class($currentException) . ":" . $currentException->getMessage() . "\n\n";
         $text .= $currentException->getTraceAsString();
-    } while (($currentException = $currentException->getPrevious()) !== null);
+        $currentException = $currentException->getPrevious();
+    } while ($currentException !== null);
 
     error_log($text);
 }

@@ -71,6 +71,7 @@ class SiteContext extends MinkContext
         $numberOfIframes = $this->getNumberOfIframes();
         for ($attempts=0; $attempts<10; $attempts++) {
             for ($iframe=0; $iframe< $numberOfIframes; $iframe++) {
+                /** @var $iframe string */
                 $this->getSession()->getDriver()->switchToIFrame($iframe);
                 try {
                     $this->assertSession()->pageTextContains($this->fixStepArgument($text));

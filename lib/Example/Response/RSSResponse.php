@@ -22,10 +22,10 @@ class RSSResponse implements Response
 
     /**
      * XMLResponse constructor.
-     * @param $xml
+     * @param string $xml
      * @param array $headers
      */
-    public function __construct($xml, array $headers = [])
+    public function __construct(string $xml, array $headers = [])
     {
         $standardHeaders = [
             'Content-Type' => 'application/rss+xml; charset=utf-8'

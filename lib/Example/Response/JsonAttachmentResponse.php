@@ -24,13 +24,11 @@ class JsonAttachmentResponse implements Response
 
     /**
      * JsonResponse constructor.
-     * @param $data
+     * @param mixed $data
      * @param array $headers
      */
     public function __construct($data, $filename = 'export.json', array $headers = [], int $statusCode = 200)
     {
-        $this->data = $data;
-
         $standardHeaders = [
             'Content-Type' => 'application/json',
             'Content-Disposition' => 'attachment; filename=' . $filename,

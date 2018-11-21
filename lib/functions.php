@@ -35,17 +35,11 @@ function showException(\Exception $exception)
         echo nl2br($exception->getTraceAsString());
 
         echo "<br/><br/>";
-    } while (($exception = $exception->getPrevious()) !== null);
+        $exception = $exception->getPrevious();
+    } while ($exception !== null);
 }
 
-/**
- * @param $errorNumber
- * @param $errorMessage
- * @param $errorFile
- * @param $errorLine
- * @return bool
- * @throws Exception
- */
+
 function saneErrorHandler($errorNumber, $errorMessage, $errorFile, $errorLine)
 {
     if (error_reporting() === 0) {
@@ -70,7 +64,7 @@ function saneErrorHandler($errorNumber, $errorMessage, $errorFile, $errorLine)
 /**
  * Decode JSON with actual error detection
  *
- * @param $json
+ * @param mixed $json
  * @return mixed
  * @throws \Example\Exception\JsonException
  */
@@ -112,10 +106,10 @@ function get_password_options()
 }
 
 /**
- * @param $password
+ * @param string $password
  * @return bool|string
  */
-function generate_password_hash($password)
+function generate_password_hash(string $password)
 {
     $options = get_password_options();
     return password_hash($password, PASSWORD_BCRYPT, $options);
@@ -148,11 +142,11 @@ function getIpAddress()
 
 /**
  * Recursive directory search
- * @param $folder
- * @param $pattern
+ * @param string $folder
+ * @param string $pattern
  * @return array
  */
-function recursiveSearch($folder, $pattern)
+function recursiveSearch(string $folder, string $pattern)
 {
     $dir = new \RecursiveDirectoryIterator($folder);
     $ite = new \RecursiveIteratorIterator($dir);
@@ -163,9 +157,6 @@ function recursiveSearch($folder, $pattern)
     }
     return $fileList;
 }
-
-
-
 
 
 function convertToValue($name, $value)
@@ -179,7 +170,7 @@ function convertToValue($name, $value)
 
     $callable = [$value, 'toArray'];
     if (is_object($value) === true && is_callable($callable)) {
-        return $value->toArray();
+        return $callable();
     }
     if (is_object($value) === true && $value instanceof \DateTime) {
         return $value->format(DATE_ATOM);
@@ -355,3 +346,46 @@ function compareArrays(array $expected, array $actual, array $currentKeyPath = [
 
     return $errors;
 }
+
+function getMimeTypeFromFilename($filename)
+{
+    $contentTypesByExtension = [
+        'pdf' => 'application/pdf',
+        'jpg' => 'image/jpg',
+        'png' => 'image/png',
+    ];
+
+    $extension = pathinfo($filename, PATHINFO_EXTENSION);
+    $extension = strtolower($extension);
+
+    if (array_key_exists($extension, $contentTypesByExtension) === false) {
+        throw new \Exception("Unknown file type [$extension]");
+    }
+
+    return $contentTypesByExtension[$extension];
+}
+
+function str_putcsv($dataHeaders, $dataRows)
+{
+    # Generate CSV data from array
+    $fh = fopen('php://temp', 'rw'); # don't create a file, attempt
+    # to use memory instead
+
+    assert($fh !== false, "File handle is false.");
+
+    /** @var $fh \resource */
+    if ($dataHeaders !== null) {
+        fputcsv($fh, $dataHeaders);
+    }
+
+    foreach ($dataRows as $row) {
+        fputcsv($fh, $row);
+    }
+    rewind($fh);
+    $csv = stream_get_contents($fh);
+    fclose($fh);
+
+    return $csv;
+}
+
+

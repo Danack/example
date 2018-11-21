@@ -24,7 +24,7 @@ class SlimErrorHandler
     public function __invoke($request, $response, $exception)
     {
         $text = "";
-        /** @var $exception \Exception */
+        /** @var \Exception $exception  */
         $currentException = $exception;
 
         do {

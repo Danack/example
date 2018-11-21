@@ -541,57 +541,6 @@
         ]
     },
     {
-        "name": "bryanjhv/slim-session",
-        "version": "3.6.1",
-        "version_normalized": "3.6.1.0",
-        "source": {
-            "type": "git",
-            "url": "https://github.com/bryanjhv/slim-session.git",
-            "reference": "0205470a35c716823ededae04d84a7f27fba400a"
-        },
-        "dist": {
-            "type": "zip",
-            "url": "https://api.github.com/repos/bryanjhv/slim-session/zipball/0205470a35c716823ededae04d84a7f27fba400a",
-            "reference": "0205470a35c716823ededae04d84a7f27fba400a",
-            "shasum": ""
-        },
-        "require": {
-            "php": ">=5.5",
-            "slim/slim": "^3.0"
-        },
-        "require-dev": {
-            "phpunit/phpunit": "^7.0"
-        },
-        "time": "2018-07-22T23:41:31+00:00",
-        "type": "library",
-        "installation-source": "dist",
-        "autoload": {
-            "psr-4": {
-                "": "src/"
-            }
-        },
-        "notification-url": "https://packagist.org/downloads/",
-        "license": [
-            "MIT"
-        ],
-        "authors": [
-            {
-                "name": "Bryan Horna",
-                "email": "bryanjhv@gmail.com",
-                "homepage": "https://bryanjhv.github.io",
-                "role": "developer"
-            }
-        ],
-        "description": "Session middleware and helper for Slim framework 3.",
-        "homepage": "https://github.com/bryanjhv/slim-session",
-        "keywords": [
-            "helper",
-            "middleware",
-            "session",
-            "slim"
-        ]
-    },
-    {
         "name": "cash/lrucache",
         "version": "1.0.0",
         "version_normalized": "1.0.0.0",
@@ -1688,53 +1637,6 @@
         ]
     },
     {
-        "name": "ezimuel/php-secure-session",
-        "version": "v1.0.1",
-        "version_normalized": "1.0.1.0",
-        "source": {
-            "type": "git",
-            "url": "https://github.com/ezimuel/PHP-Secure-Session.git",
-            "reference": "6ddb28c175a4747fcf9a68a439ce6aad5b1d0b95"
-        },
-        "dist": {
-            "type": "zip",
-            "url": "https://api.github.com/repos/ezimuel/PHP-Secure-Session/zipball/6ddb28c175a4747fcf9a68a439ce6aad5b1d0b95",
-            "reference": "6ddb28c175a4747fcf9a68a439ce6aad5b1d0b95",
-            "shasum": ""
-        },
-        "require": {
-            "ext-mbstring": "*",
-            "ext-openssl": "*",
-            "paragonie/random_compat": "^2.0.2",
-            "php": "^5.6 || ^7.0"
-        },
-        "require-dev": {
-            "phpunit/phpunit": "^5.7"
-        },
-        "time": "2017-03-30T06:43:54+00:00",
-        "type": "library",
-        "installation-source": "dist",
-        "autoload": {
-            "psr-4": {
-                "PHPSecureSession\\": "src/"
-            },
-            "files": [
-                "bin/register_secure_session.php"
-            ]
-        },
-        "notification-url": "https://packagist.org/downloads/",
-        "license": [
-            "BSD-3-Clause"
-        ],
-        "description": "Encrypt and authenticate PHP session data using AES-256 and HMAC-SHA256",
-        "homepage": "https://github.com/ezimuel/PHP-Secure-Session",
-        "keywords": [
-            "Authentication",
-            "encrypt",
-            "session"
-        ]
-    },
-    {
         "name": "fabpot/goutte",
         "version": "v3.2.3",
         "version_normalized": "3.2.3.0",
@@ -2318,17 +2220,17 @@
     },
     {
         "name": "mockery/mockery",
-        "version": "0.9.9",
-        "version_normalized": "0.9.9.0",
+        "version": "0.9.10",
+        "version_normalized": "0.9.10.0",
         "source": {
             "type": "git",
             "url": "https://github.com/mockery/mockery.git",
-            "reference": "6fdb61243844dc924071d3404bb23994ea0b6856"
+            "reference": "4876fc0c7d9e5da49712554a35c94d84ed1e9ee5"
         },
         "dist": {
             "type": "zip",
-            "url": "https://api.github.com/repos/mockery/mockery/zipball/6fdb61243844dc924071d3404bb23994ea0b6856",
-            "reference": "6fdb61243844dc924071d3404bb23994ea0b6856",
+            "url": "https://api.github.com/repos/mockery/mockery/zipball/4876fc0c7d9e5da49712554a35c94d84ed1e9ee5",
+            "reference": "4876fc0c7d9e5da49712554a35c94d84ed1e9ee5",
             "shasum": ""
         },
         "require": {
@@ -2339,7 +2241,7 @@
         "require-dev": {
             "phpunit/phpunit": "~4.0"
         },
-        "time": "2017-02-28T12:52:32+00:00",
+        "time": "2018-11-13T20:50:16+00:00",
         "type": "library",
         "extra": {
             "branch-alias": {
@@ -2641,57 +2543,6 @@
         "keywords": [
             "router",
             "routing"
-        ]
-    },
-    {
-        "name": "paragonie/random_compat",
-        "version": "v2.0.17",
-        "version_normalized": "2.0.17.0",
-        "source": {
-            "type": "git",
-            "url": "https://github.com/paragonie/random_compat.git",
-            "reference": "29af24f25bab834fcbb38ad2a69fa93b867e070d"
-        },
-        "dist": {
-            "type": "zip",
-            "url": "https://api.github.com/repos/paragonie/random_compat/zipball/29af24f25bab834fcbb38ad2a69fa93b867e070d",
-            "reference": "29af24f25bab834fcbb38ad2a69fa93b867e070d",
-            "shasum": ""
-        },
-        "require": {
-            "php": ">=5.2.0"
-        },
-        "require-dev": {
-            "phpunit/phpunit": "4.*|5.*"
-        },
-        "suggest": {
-            "ext-libsodium": "Provides a modern crypto API that can be used to generate random bytes."
-        },
-        "time": "2018-07-04T16:31:37+00:00",
-        "type": "library",
-        "installation-source": "dist",
-        "autoload": {
-            "files": [
-                "lib/random.php"
-            ]
-        },
-        "notification-url": "https://packagist.org/downloads/",
-        "license": [
-            "MIT"
-        ],
-        "authors": [
-            {
-                "name": "Paragon Initiative Enterprises",
-                "email": "security@paragonie.com",
-                "homepage": "https://paragonie.com"
-            }
-        ],
-        "description": "PHP 5.x polyfill for random_bytes() and random_int() from PHP 7",
-        "keywords": [
-            "csprng",
-            "polyfill",
-            "pseudorandom",
-            "random"
         ]
     },
     {
@@ -3853,23 +3704,23 @@
     },
     {
         "name": "psr/log",
-        "version": "1.0.2",
-        "version_normalized": "1.0.2.0",
+        "version": "1.1.0",
+        "version_normalized": "1.1.0.0",
         "source": {
             "type": "git",
             "url": "https://github.com/php-fig/log.git",
-            "reference": "4ebe3a8bf773a19edfe0a84b6585ba3d401b724d"
+            "reference": "6c001f1daafa3a3ac1d8ff69ee4db8e799a654dd"
         },
         "dist": {
             "type": "zip",
-            "url": "https://api.github.com/repos/php-fig/log/zipball/4ebe3a8bf773a19edfe0a84b6585ba3d401b724d",
-            "reference": "4ebe3a8bf773a19edfe0a84b6585ba3d401b724d",
+            "url": "https://api.github.com/repos/php-fig/log/zipball/6c001f1daafa3a3ac1d8ff69ee4db8e799a654dd",
+            "reference": "6c001f1daafa3a3ac1d8ff69ee4db8e799a654dd",
             "shasum": ""
         },
         "require": {
             "php": ">=5.3.0"
         },
-        "time": "2016-10-10T12:19:37+00:00",
+        "time": "2018-11-20T15:27:04+00:00",
         "type": "library",
         "extra": {
             "branch-alias": {
@@ -5958,17 +5809,17 @@
     },
     {
         "name": "twilio/sdk",
-        "version": "5.24.2",
-        "version_normalized": "5.24.2.0",
+        "version": "5.25.0",
+        "version_normalized": "5.25.0.0",
         "source": {
             "type": "git",
             "url": "https://github.com/twilio/twilio-php.git",
-            "reference": "e0438e0f4f3301fd750d43bac159fab6bf59c5a8"
+            "reference": "0144b6f9f643cbe20f58d78bb2e0e6b1ea5d6856"
         },
         "dist": {
             "type": "zip",
-            "url": "https://api.github.com/repos/twilio/twilio-php/zipball/e0438e0f4f3301fd750d43bac159fab6bf59c5a8",
-            "reference": "e0438e0f4f3301fd750d43bac159fab6bf59c5a8",
+            "url": "https://api.github.com/repos/twilio/twilio-php/zipball/0144b6f9f643cbe20f58d78bb2e0e6b1ea5d6856",
+            "reference": "0144b6f9f643cbe20f58d78bb2e0e6b1ea5d6856",
             "shasum": ""
         },
         "require": {
@@ -5978,7 +5829,7 @@
             "apigen/apigen": "^4.1",
             "phpunit/phpunit": "4.5.*"
         },
-        "time": "2018-10-29T12:32:45+00:00",
+        "time": "2018-11-16T20:15:31+00:00",
         "type": "library",
         "installation-source": "dist",
         "autoload": {
@@ -6058,17 +5909,17 @@
     },
     {
         "name": "wp-coding-standards/wpcs",
-        "version": "1.1.0",
-        "version_normalized": "1.1.0.0",
+        "version": "1.2.0",
+        "version_normalized": "1.2.0.0",
         "source": {
             "type": "git",
             "url": "https://github.com/WordPress-Coding-Standards/WordPress-Coding-Standards.git",
-            "reference": "46d42828ce7355d8b3776e3171f2bda892d179b4"
+            "reference": "7aa217ab38156c5cb4eae0f04ae376027c407a9b"
         },
         "dist": {
             "type": "zip",
-            "url": "https://api.github.com/repos/WordPress-Coding-Standards/WordPress-Coding-Standards/zipball/46d42828ce7355d8b3776e3171f2bda892d179b4",
-            "reference": "46d42828ce7355d8b3776e3171f2bda892d179b4",
+            "url": "https://api.github.com/repos/WordPress-Coding-Standards/WordPress-Coding-Standards/zipball/7aa217ab38156c5cb4eae0f04ae376027c407a9b",
+            "reference": "7aa217ab38156c5cb4eae0f04ae376027c407a9b",
             "shasum": ""
         },
         "require": {
@@ -6076,12 +5927,12 @@
             "squizlabs/php_codesniffer": "^2.9.0 || ^3.0.2"
         },
         "require-dev": {
-            "phpcompatibility/php-compatibility": "*"
+            "phpcompatibility/php-compatibility": "^9.0"
         },
         "suggest": {
             "dealerdirect/phpcodesniffer-composer-installer": "^0.4.3 || This Composer plugin will sort out the PHPCS 'installed_paths' automatically."
         },
-        "time": "2018-09-10T17:04:05+00:00",
+        "time": "2018-11-12T10:13:12+00:00",
         "type": "phpcodesniffer-standard",
         "installation-source": "dist",
         "notification-url": "https://packagist.org/downloads/",

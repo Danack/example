@@ -20,12 +20,7 @@ class RedirectResponse implements Response
         return $this->headers;
     }
 
-    /**
-     * JsonResponse constructor.
-     * @param $data
-     * @param array $headers
-     */
-    public function __construct($uri, int $statusCode = 303, array $headers = [])
+    public function __construct(string $uri, int $statusCode = 303, array $headers = [])
     {
         $standardHeaders = [
             'location' => $uri

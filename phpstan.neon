@@ -12,3 +12,4 @@ parameters:
   excludes_analyse:
     - *lib/birke/*
     - *injectionParams/*
+    - *Behat/SiteContext.php

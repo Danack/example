@@ -4,26 +4,6 @@ namespace Example\Response;
 
 use Example\Response\Response;
 
-function str_putcsv($dataHeaders, $dataRows)
-{
-    # Generate CSV data from array
-    $fh = fopen('php://temp', 'rw'); # don't create a file, attempt
-    # to use memory instead
-
-    if ($dataHeaders !== null) {
-        fputcsv($fh, $dataHeaders);
-    }
-
-    foreach ($dataRows as $row) {
-        fputcsv($fh, $row);
-    }
-    rewind($fh);
-    $csv = stream_get_contents($fh);
-    fclose($fh);
-
-    return $csv;
-}
-
 
 class CsvDataResponse implements Response
 {
@@ -44,11 +24,6 @@ class CsvDataResponse implements Response
         return $this->headers;
     }
 
-    /**
-     * JsonResponse constructor.
-     * @param $data
-     * @param array $headers
-     */
     public function __construct($dataHeaders, $dataRows, $filename = "file.csv", array $headers = [], int $statusCode = 200)
     {
         $standardHeaders = [

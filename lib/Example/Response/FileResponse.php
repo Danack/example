@@ -6,6 +6,9 @@ namespace Example\Response;
 
 use Example\Response\Response;
 
+
+
+
 class FileResponse implements Response
 {
     /** @var array  */

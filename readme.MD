@@ -112,3 +112,11 @@ All of the routes are in routes directory. The routes for each environment are s
 ## Injection parameters
 
 All of the injection parameters are in the injectionParams directory. There should be one file per environment plus other files for testing.
+
+
+
+## TODO
+
+* Put session support back in
+    "bryanjhv/slim-session": "^3.2",
+    "ezimuel/php-secure-session": "v1.0.1",

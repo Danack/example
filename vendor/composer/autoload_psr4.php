@@ -37,7 +37,6 @@ return array(
     'Psr\\Http\\Message\\' => array($vendorDir . '/psr/http-factory/src', $vendorDir . '/psr/http-message/src'),
     'Psr\\Container\\' => array($vendorDir . '/psr/container/src'),
     'Phinx\\' => array($vendorDir . '/robmorgan/phinx/src/Phinx'),
-    'PHPSecureSession\\' => array($vendorDir . '/ezimuel/php-secure-session/src'),
     'PHPCompatibility\\' => array($vendorDir . '/phpcompatibility/php-compatibility/PHPCompatibility'),
     'PDepend\\' => array($vendorDir . '/pdepend/pdepend/src/main/php/PDepend'),
     'Monolog\\' => array($vendorDir . '/monolog/monolog/src/Monolog'),
@@ -64,5 +63,4 @@ return array(
     'Behat\\Mink\\' => array($vendorDir . '/behat/mink/src'),
     'Auryn\\' => array($vendorDir . '/rdlowrey/auryn/lib'),
     'Airbrake\\' => array($vendorDir . '/airbrake/phpbrake/src'),
-    '' => array($vendorDir . '/bryanjhv/slim-session/src'),
 );

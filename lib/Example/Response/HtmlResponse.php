@@ -29,10 +29,10 @@ class HtmlResponse implements Response
 
     /**
      * HtmlResponse constructor.
-     * @param $html
+     * @param string $html
      * @param array $headers
      */
-    public function __construct($html, array $headers = [], int $status = 200)
+    public function __construct(string $html, array $headers = [], int $status = 200)
     {
 
 // TODO - we could lock down the javascript and other resources that can be run on

@@ -18,7 +18,7 @@ use Slim\Container;
 class ExampleRouter implements RouterInterface
 {
     /**
-     * @var \FastRoute\Dispatcher
+     * @var \FastRoute\Dispatcher|null
      */
     protected $dispatcher;
 
@@ -108,7 +108,7 @@ class ExampleRouter implements RouterInterface
         $callableInfo = $routeInfo[1];
         // Single callable - just return it.
         if (is_array($callableInfo) === false) {
-            $this->matchedRoute = new Route([$request->getMethod()], 'whatever', $callableInfo, [], "0");
+            $this->matchedRoute = new Route([$request->getMethod()], 'whatever', $callableInfo, [], 0);
             $this->matchedRoute->setContainer($this->container); // this makes me sad
             return $routeInfo;
         }
@@ -124,7 +124,7 @@ class ExampleRouter implements RouterInterface
             $routeInfo[2],
         ];
 
-        $this->matchedRoute = new Route([$request->getMethod()], 'whatever', $callableInfo[0], [], "0");
+        $this->matchedRoute = new Route([$request->getMethod()], 'whatever', $callableInfo[0], [], 0);
         $this->matchedRoute->setContainer($this->container); // this makes me sad
 
         return $slimRouteInfo;

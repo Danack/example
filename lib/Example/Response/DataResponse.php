@@ -28,12 +28,11 @@ class DataResponse implements Response
 
     /**
      * JsonResponse constructor.
-     * @param $data
+     * @param mixed $data  The json_encodable data
      * @param array $headers
      */
     public function __construct($data, array $headers = [], int $statusCode = 200)
     {
-        $this->data = $data;
         $this->headers = array_merge(self::STANDARD_HEADERS, $headers);
         $this->body = json_encode($data, JSON_PRETTY_PRINT | JSON_UNESCAPED_SLASHES);
         $this->statusCode = $statusCode;
