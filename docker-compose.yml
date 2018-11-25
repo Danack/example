@@ -1,6 +1,5 @@
 version: "3"
 services:
-
   selenium-chrome:
     image: selenium/standalone-chrome-debug
     volumes:
@@ -11,11 +10,10 @@ services:
     dns:
       - 8.8.8.8
       - 4.4.4.4
-    #  - 192.168.9.45
     environment:
       VNC_NO_PASSWORD: 1
-      SCREEN_WIDTH: 1080
-      SCREEN_HEIGHT: 1080
+      SCREEN_WIDTH: 1200
+      SCREEN_HEIGHT: 900
   db:
     image: mysql:5.7
     environment:
@@ -29,22 +27,20 @@ services:
       - ./docker/mysql/config/my.cnf:/etc/mysql/my.cnf
       - ./data/mysql:/var/lib/mysql
       - ./data/mysql_import:/docker-entrypoint-initdb.d
-  php_backend:
-    build: docker/php_backend
-    image: example_php_backend:latest
+  php_fpm:
+    build: docker/php_fpm
+    image: example_php_fpm
     depends_on:
       - db
       - redis
     volumes:
       - .:/var/www
-      # - ./logs/php_backend:/var/log/api
-  php_backend_debug:
-    build: docker/php_backend_debug
-#    image: example_php_backend_debug:latest
+  php_fpm_debug:
+    build: docker/php_fpm_debug
     depends_on:
       - db
       - redis
-      - php_backend
+      - php_fpm
     volumes:
       - .:/var/www
   redis:
@@ -69,26 +65,25 @@ services:
 #      - ./:/var/app
   nginx:
     build: docker/nginx
-    # image: example_web_server:latest
     depends_on:
       - db
       - redis
-      - php_backend
-      - php_backend_debug
+      - php_fpm
+      - php_fpm_debug
     volumes:
       - .:/var/www
     ports:
       - "80:80"
       - "8000:8000"
       - "8001:8001"
-#      dns_search:
-#        - dc1.example.com
-#        - dc2.example.com
-#    networks:
-#      default:
-#        aliases:
-#          - local.app.basereality.com
-
+  supervisord:
+    build: docker/supervisord
+    depends_on:
+      - redis
+    ports:
+      - "8080:8080"
+    volumes:
+      - .:/var/www
 
 # https://rskuipers.com/entry/file-permissions-with-docker-on-linux
 # fpm:

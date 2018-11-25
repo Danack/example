@@ -11,7 +11,7 @@ error_reporting(E_ALL);
 
 require_once __DIR__ . '/vendor/autoload.php';
 require __DIR__ . '/lib/factories.php';
-require __DIR__ . '/lib/exception_mappers.php';
+require __DIR__ . '/lib/exception_mappers_cli.php';
 require __DIR__ . "/cli/cli_commands.php";
 
 set_time_limit(20);

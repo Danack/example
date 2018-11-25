@@ -8,7 +8,6 @@ if (function_exists('injectionParams') == false) {
     {
         // These classes will only be created once by the injector.
         $shares = [
-            \SlimSession\Helper::class,
             \Doctrine\ORM\EntityManager::class,
             \Airbrake\Notifier::class
         ];
@@ -16,7 +15,7 @@ if (function_exists('injectionParams') == false) {
         // Alias interfaces (or classes) to the actual types that should be used
         // where they are required.
         $aliases = [
-            \Example\Service\OrderNumberEncoder\OrderNumberEncoder::class => \Example\Service\OrderNumberEncoder\HashidOrderNumberEncoder::class,
+
         ];
 
         // Delegate the creation of types to callables.
@@ -24,7 +23,6 @@ if (function_exists('injectionParams') == false) {
             \PDO::class => 'createPDO',
             \Redis::class => 'createRedis',
             \Doctrine\ORM\EntityManager::class => 'createDoctrineEntityManager',
-            Predis\Client::class => 'createPredisFromConfig',
         ];
 
         // Define some params that can be injected purely by name.

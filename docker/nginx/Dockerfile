@@ -8,14 +8,9 @@ RUN apt-get update -qq \
 
 WORKDIR /var/www
 
-# Set up configuration volumes
-RUN mkdir -p /etc/config
-
-# Used by Jenkins to package code in to container
-# COPY web /var/www
-
-# CMD ["/usr/sbin/nginx", "-c", "/etc/nginx/nginx.conf"]
-
 CMD ["/usr/sbin/nginx", "-c", "/var/www/docker/nginx/config/nginx.conf"]
 
+# For debugging, rather than having the container exit immediately,
+# being able to switch the command to be just 'follow that file' allows
+# you to bash into the container to inspect the state after nginx has crashed.
 # CMD ["tail", "-f", "/var/www/readme.MD"]

@@ -21,13 +21,13 @@ install:
   # Install dev php dependencies
   # - docker-compose exec web sh -c "composer install --no-interaction --prefer-dist"
 script:
-  - docker-compose exec php_backend sh -c "php vendor/bin/phpcs --standard=./test/codesniffer.xml --encoding=utf-8 --extensions=php -p -s lib"
-  - docker-compose exec php_backend sh -c "php phpstan.phar analyze -c ./phpstan.neon -l 7 lib"
-  - docker-compose exec php_backend sh -c "php vendor/bin/phinx migrate"
-  - docker-compose exec php_backend sh -c "php vendor/bin/phinx seed:run"
+  - docker-compose exec php_fpm sh -c "php vendor/bin/phpcs --standard=./test/codesniffer.xml --encoding=utf-8 --extensions=php -p -s lib"
+  - docker-compose exec php_fpm sh -c "php phpstan.phar analyze -c ./phpstan.neon -l 7 lib"
+  - docker-compose exec php_fpm sh -c "php vendor/bin/phinx migrate"
+  - docker-compose exec php_fpm sh -c "php vendor/bin/phinx seed:run"
   # Make sure site is working at least a bit.
   - curl http://local.app.basereality.com
-  - docker-compose exec php_backend sh -c "php vendor/bin/behat --config=./behat.yml --colors --stop-on-failure"
+  - docker-compose exec php_fpm sh -c "php vendor/bin/behat --config=./behat.yml --colors --stop-on-failure"
 
 notifications:
   email: false

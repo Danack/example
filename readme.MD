@@ -1,16 +1,22 @@
 # Example box
 
+
+[![Build Status](https://travis-ci.org/Danack/example.svg?branch=master)](https://travis-ci.org/Danack/example)
+
 This project is an example of how to use various pieces of technology:
 
 * Xdebug
 * Behat tests
-* Docker for local development - docs still to do.
+* Docker for local development
+* Supervisord for background workers
 * Slim framework with Auryn DI - docs still to do.
 * React + webpack - docs still to do.
 
-[![Build Status](https://travis-ci.org/Danack/example.svg?branch=master)](https://travis-ci.org/Danack/example)
+I'm getting all of the documentation to a basic level, before polishing each part individually. 
 
 ## Quickstart
+
+How to get this project running:
 
 1. Get Docker community edition and start it
 
@@ -19,7 +25,7 @@ This project is an example of how to use various pieces of technology:
 * Click the whale icon for docker at the edge of your screen. 
 * Under 'File Sharing' add a path that you will check the project out into e.g /projects
 
-3. Setup loopback address
+3. Setup loopback address (optional if running Docker > 18.03)
 
 Setting up a loopback address allows an local IP address to work both inside and outside the docker containers. It also mostly avoids the need to touch docker networking.
 
@@ -46,7 +52,7 @@ Wait for text to stop scrolling by...
 
 ## Docker commands
 
-After checking out the repo, building the images
+After checking out the repo, tell docker-compose to build all of the images with:
 
 ```
 docker-compose build
@@ -112,7 +118,6 @@ All of the routes are in routes directory. The routes for each environment are s
 ## Injection parameters
 
 All of the injection parameters are in the injectionParams directory. There should be one file per environment plus other files for testing.
-
 
 
 ## TODO

@@ -1,4 +1,4 @@
-FROM example_php_backend:latest
+FROM example_php_fpm:latest
 
 # TODO xdebug isn't currently stable with php 7.2
 RUN DEBIAN_FRONTEND=noninteractive apt-get install -y --no-install-recommends php7.2-xdebug

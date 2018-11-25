@@ -11,7 +11,7 @@ preg_match('#Docker version (?P<version>[\d\.]+), build ([\da-z]+)#', $output, $
 if (is_array($matches) && array_key_exists('version', $matches) === true) {
     $dockerVersionInstalled = $matches['version'];
     $dockerVersionWithInternalHost = '18.03.0';
-    if (version_compare($dockerVersionInstalled, $dockerVersionWithInternalHost) > 0) {
+    if (version_compare($dockerVersionInstalled, $dockerVersionWithInternalHost) >= 0) {
         $dockerHost = 'host.docker.internal';
     };
 }

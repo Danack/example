@@ -4,7 +4,7 @@
 
 Having xdebug available immediately is a vital tool for debugging code. If developers need to restart vagrant or docker boxes to be able to debug problems, they will naturally fall back to 'var_dump debugging' which is a terribly inefficient way of figuring out what code is doing.
 
-This example project is setup with two PHP backend containers which are almost identical. One of them, named 'php_backend' doesn't have xdebug enabled. The other, name 'php_backend_debug' always has xdebug enabled.
+This example project is setup with two PHP backend containers which are almost identical. One of them, named 'php_fpm' doesn't have xdebug enabled. The other, name 'php_fpm_debug' always has xdebug enabled.
 
 The xdebug enabled PHP backend can be reached directly by specifying port 8001.
 
