@@ -1,0 +1,15 @@
+<?xml version="1.0"?>
+<psalm>
+    <projectFiles>
+        <directory name="lib" />
+        <directory name="injectionParams" />
+    </projectFiles>
+
+    <issueHandlers>
+        <MissingReturnType errorLevel="suppress" />
+        <MissingClosureParamType errorLevel="suppress" />
+        <MissingClosureReturnType errorLevel="suppress" />
+        <MissingParamType errorLevel="suppress" />
+        <MissingPropertyType errorLevel="suppress" />
+    </issueHandlers>
+</psalm>

@@ -1,5 +1,18 @@
 version: "3"
 services:
+  chrome:
+    ## This image may be more stable, but doesn't give any output when Chrome
+    ## headless crashes
+    # image: justinribeiro/chrome-headless:latest
+    ## This image is more up-to-date....but can be too bleeding edge, aka more
+    ## likely to see bugs.
+    image: alpeware/chrome-headless-trunk
+    ports:
+      - "9222:9222"
+    cap_add:
+      - SYS_ADMIN
+    security_opt:
+      - seccomp:unconfined
   selenium-chrome:
     image: selenium/standalone-chrome-debug
     volumes:

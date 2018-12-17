@@ -52,6 +52,17 @@ class AppRoutes implements Routes
             ['/iframe/contents', 'GET', 'Example\AppController\IframeExample::iframeContents'],
 
 
+            ['/invoices', 'GET', 'Example\AppController\Invoice::listInvoices'],
+
+            ['/invoice/{invoice_id:.+}/render', 'GET', 'Example\AppController\Invoice::renderInvoice'],
+
+
+
+            ['/invoice/{invoice_id:.+}/generate', 'GET', 'Example\AppController\Invoice::generateOrGetDownloadLink'],
+
+
+            ['/invoice/{invoice_id:.+}/download', 'GET', 'Example\AppController\Invoice::downloadInvoice'],
+
 //            ['/test/caught_exception', 'GET', 'Example\AppController\Debug::testCaughtException'],
 //            ['/test/uncaught_exception', 'GET', 'Example\AppController\Debug::testUncaughtException'],
 

@@ -31,7 +31,12 @@ function addDebugCommands(Application $console)
 function addProcessCommands(Application $console)
 {
     $command = new Command('process:alive_check', 'Example\CliController\AliveCheck::run');
-    $command->setDescription("Place holder command to make .");
+    $command->setDescription("Place holder command to make sure commands are running .");
+    $console->add($command);
+
+
+    $command = new Command('process:invoice_pdf_generate', 'Example\CliController\PrintUrlToPdfQueueProcessor::run');
+    $command->setDescription("Listens for InvoicePDF jobs and runs them .");
     $console->add($command);
 }
 

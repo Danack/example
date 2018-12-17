@@ -399,3 +399,20 @@ function createDoctrineEntityManager()
     // obtaining the entity manager
     return \Doctrine\ORM\EntityManager::create($connectionParams, $config);
 }
+
+
+function createPdfGeneratorFromConfig() : \Example\CliController\PdfGenerator
+{
+    return new \Example\CliController\PdfGenerator(
+        'http://10.254.254.254:9222',
+        __DIR__ . '../var/tmp_pdf'
+    );
+}
+
+
+function createFileInvoiceLocalStorage()
+{
+    $path = __DIR__ . '/../var/files_invoice';
+
+    return new \Example\Service\LocalStorage\InvoiceLocalStorage\FileInvoiceLocalStorage($path);
+}

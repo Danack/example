@@ -1,0 +1,19 @@
+{% extends "base.html" %}
+
+{% block page_body %}
+  <h1>Invoices</h1>
+
+{% set invoiceList = inject('Example\\Component\\InvoiceList') %}
+{{ invoiceList.render()|raw }}
+
+
+{% endblock %}
+
+
+
+{% block page_javascript %}
+
+<script>
+  initInvoiceDown('.invoice_download');
+</script>
+{% endblock %}

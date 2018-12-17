@@ -5,6 +5,7 @@ use Auryn\Injector;
 require_once(__DIR__.'/../vendor/autoload.php');
 require_once __DIR__ . '/../injectionParams/cliTest.php';
 require_once __DIR__ . '/../lib/functions.php';
+require_once __DIR__ . '/../lib/factories.php';
 
 /**
  * @param array $testAliases

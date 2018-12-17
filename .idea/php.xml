@@ -116,6 +116,9 @@
       <path value="$PROJECT_DIR$/vendor/savvot/random" />
       <path value="$PROJECT_DIR$/vendor/slevomat/coding-standard" />
       <path value="$PROJECT_DIR$/vendor/danack/configurator" />
+      <path value="$PROJECT_DIR$/vendor/danack/imagick-contained" />
+      <path value="$PROJECT_DIR$/vendor/symfony/contracts" />
+      <path value="$PROJECT_DIR$/vendor/ralouphie/getallheaders" />
     </include_path>
   </component>
   <component name="PhpProjectServersManager">

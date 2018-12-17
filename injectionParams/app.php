@@ -7,32 +7,35 @@ function injectionParams()
     // These classes will only be created once by the injector.
     $shares = [
         \Redis::class,
-        \SlimSession\Helper::class,
+//        \SlimSession\Helper::class,
         \Twig_Environment::class,
         \Auryn\Injector::class,
-        \Birke\Rememberme\Authenticator::class,
+//        \Birke\Rememberme\Authenticator::class,
         Doctrine\ORM\EntityManager::class
     ];
 
     // Alias interfaces (or classes) to the actual types that should be used
     // where they are required.
     $aliases = [
-        \Example\Route\Routes::class => \Example\Route\AppRoutes::class,
+        Example\Route\Routes::class => Example\Route\AppRoutes::class,
         Example\Repo\BookListRepo\BookListRepo::class => Example\Repo\BookListRepo\DoctrineBookListRepo::class,
+        Example\Repo\InvoiceRepo\InvoiceRepo::class => \Example\Repo\InvoiceRepo\FakeInvoiceRepo::class,
 
-
-
+        \Example\Service\LocalStorage\InvoiceLocalStorage\InvoiceLocalStorage::class =>
+        \Example\Service\LocalStorage\InvoiceLocalStorage\FileInvoiceLocalStorage::class,
+        \Example\Queue\PrintUrlToPdfQueue::class => \Example\Queue\RedisPrintUrlToPdfQueue::class,
     ];
 
     // Delegate the creation of types to callables.
     $delegates = [
         \Psr\Log\LoggerInterface::class => 'createLogger',
         \PDO::class => 'createPDO',
+        \Redis::class => '\createRedis',
         \Slim\App::class => 'createAppForSite',
         \Twig_Environment::class => 'createTwigForSite',
-        Doctrine\ORM\EntityManager::class => 'createDoctrineEntityManager'
+        Doctrine\ORM\EntityManager::class => 'createDoctrineEntityManager',
+        \Example\Service\LocalStorage\InvoiceLocalStorage\FileInvoiceLocalStorage::class => 'createFileInvoiceLocalStorage',
     ];
-
 
 //    if (getConfig(['example', 'direct_sending_no_queue'], false) === true) {
 //

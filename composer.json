@@ -6,6 +6,8 @@
         "danack/esprintf": "^0.5.0",
         "danack/params": "^0.3.6",
         "danack/slim-auryn-invoker": "^1.1.0",
+        "dmore/behat-chrome-extension": "^1.2",
+        "dmore/chrome-mink-driver": "2.6",
         "doctrine/orm": "v2.5.6",
         "google/recaptcha": "^1.2",
         "hashids/hashids": "^3.0",

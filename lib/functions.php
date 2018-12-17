@@ -467,3 +467,42 @@ function continuallyExecuteCallable($callable, int $secondsBetweenRuns, int $sle
 
     echo "Finishing continuallyExecuteCallable\n";
 }
+
+
+function buildInvoiceRenderLink(\Example\Model\Invoice $invoice): string
+{
+    $domain = 'http://local.app.basereality.com';
+    $link = sprintf(
+        '%s/invoice/%s/render',
+        $domain,
+        $invoice->getId()
+    );
+
+    return $link;
+}
+
+function buildInvoicePrepareLink(\Example\Model\Invoice $invoice): string
+{
+    $domain = 'http://local.app.basereality.com';
+    $link = sprintf(
+        '%s/invoice/%s/generate',
+        $domain,
+        $invoice->getId()
+    );
+
+    return $link;
+}
+
+
+function buildInvoiceDownloadLink(\Example\Model\Invoice $invoice): string
+{
+    $domain = 'http://local.app.basereality.com';
+
+    $link = sprintf(
+        '%s/invoice/%s/download',
+        $domain,
+        $invoice->getId()
+    );
+
+    return $link;
+}
