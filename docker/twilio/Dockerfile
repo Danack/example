@@ -23,10 +23,9 @@ RUN mkdir -p /var/app
 
 COPY entryPoint_twilio.sh /var/app/entryPoint_twilio.sh
 
-# CMD ["sh /var/app/entryPoint_twilio.sh"]
+CMD ["sh", "/var/app/entryPoint_twilio.sh"]
 
 # CMD whoami && sh /var/app/entryPoint_twilio.sh
-
-CMD tail -f /var/app/entryPoint_twilio.sh
+#CMD tail -f /var/app/entryPoint_twilio.sh
 
 
