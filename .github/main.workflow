@@ -6,7 +6,7 @@ workflow "Action testing" {
 }
 
 action "Twilio Action" {
-  uses = "./"
+  uses = "./docker/twilio"
   secrets = ["GITHUB_TOKEN", "TWILIO_SID", "TWILIO_TOKEN", "TWILIO_OA"]
 }
 
