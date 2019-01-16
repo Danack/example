@@ -34,10 +34,6 @@ class ChromeDriver extends CoreDriver
      */
     private $document = 'document';
     /**
-     * @var int How many milliseconds we should wait for DOM to be ready after each action/transition.
-     */
-    private $domWaitTimeout;
-    /**
      * @var array
      */
     private $options;
@@ -61,7 +57,6 @@ class ChromeDriver extends CoreDriver
         $this->browser = new ChromeBrowser($this->ws_url . '/devtools/browser', isset($options['socketTimeout']) ? $options['socketTimeout'] : 10);
         $this->browser->setHttpClient($http_client);
         $this->browser->setHttpUri($api_url);
-        $this->domWaitTimeout = isset($options['domWaitTimeout']) ? $options['domWaitTimeout'] : 3000;
         $this->options = $options;
     }
 
@@ -127,7 +122,6 @@ class ChromeDriver extends CoreDriver
             $this->browser->close();
         } catch (ConnectionException $exception) {
         } catch (DriverException $exception) {
-        } catch (StreamReadException $exception) {
         }
 
         $this->is_started = false;
@@ -173,7 +167,6 @@ class ChromeDriver extends CoreDriver
     public function visit($url)
     {
         $this->page->visit($url);
-        $this->document = 'document';
         $this->page->waitForLoad();
         $this->waitForDom();
     }
@@ -458,7 +451,7 @@ JS;
      * Finds elements with specified XPath query.
      *
      * @param string $xpath
-     * @return string[] The XPath of the matched elements
+     * @return \Behat\Mink\Element\NodeElement[]
      * @throws ElementNotFoundException
      */
     protected function findElementXpaths($xpath)
@@ -494,16 +487,8 @@ JS;
     result
 JS;
 
-        $values = $this->evaluateScript($expression);
-
-        // Cannot XPath directly into an SVG, workaround is to select the element from the result of the original XPath.
-        foreach ($values as $key => $value) {
-            if (stripos($value, 'svg[') !== false) {
-                $values[$key] = sprintf('(%s)[%d]', $xpath, $key + 1);
-            }
-        }
-
-        return $values;
+        $value = $this->evaluateScript($expression);
+        return $value;
     }
 
     /**
@@ -528,7 +513,7 @@ JS;
     public function getText($xpath)
     {
         $text = $this->getElementProperty($xpath, 'innerText');
-        $text = trim(preg_replace('/\s+/u', ' ', $text), ' ');
+        $text = trim(preg_replace('/\s+/', ' ', $text), ' ');
         return $text;
     }
 
@@ -625,9 +610,7 @@ JS;
                     $this->page->send('Input.dispatchKeyEvent', ['type' => 'keyDown', 'text' => chr(13)]);
                 }
                 $this->page->send('Input.dispatchKeyEvent', ['type' => 'keyDown', 'text' => $char]);
-                $this->keyDown($xpath, $char);
                 $this->page->send('Input.dispatchKeyEvent', ['type' => 'keyUp']);
-                $this->keyUp($xpath, $char);
             }
             usleep(5000);
 
@@ -762,10 +745,8 @@ JS;
     var initialY = Math.ceil(rect.top);
     var maxX = Math.floor(rect.left + rect.width);
     var maxY = Math.floor(rect.top + rect.height);
-    var midX = Math.floor((initialX + maxX) / 2);
-    var midY = Math.floor((initialY + maxY) / 2);
-    for (x = midX; x >= initialX; x--) {
-        for (y = midY; y >= initialY; y--) {
+    for (x = initialX; x <= maxX; x++) {
+        for (y = initialY; y <= maxY; y++) {
             var pointElement = document.elementFromPoint(x, y);
             if (element === pointElement || element.contains(pointElement)) {
                 return [x, y];
@@ -801,9 +782,9 @@ JS;
                     'clickCount' => 1,
                 ];
                 $this->page->send('Input.dispatchMouseEvent', $parameters);
+                usleep(5000);
+                $this->waitForDom();
             }
-            usleep(50000);
-            $this->waitForDom();
         }
     }
 
@@ -1079,13 +1060,11 @@ JS;
     public function acceptAlert($text = '')
     {
         $this->page->send('Page.handleJavaScriptDialog', ['accept' => true, 'promptText' => $text]);
-        $this->waitForDom();
     }
 
     public function dismissAlert()
     {
         $this->page->send('Page.handleJavaScriptDialog', ['accept' => false]);
-        $this->waitForDom();
     }
 
     protected function deleteAllCookies()
@@ -1278,21 +1257,13 @@ JS;
         $return = [];
         foreach ($properties as $property) {
             if ($property['name'] !== '__proto__' && $property['name'] !== 'length') {
-                $value = $property['value'];
-                if (!empty($value['type']) && $value['type'] == 'object' &&
-                    !empty($value['className']) &&
-                    in_array($value['className'], ['Array', 'Object'])
+                if (!empty($property['value']['type']) && $property['value']['type'] == 'object' &&
+                    !empty($property['value']['className']) &&
+                    in_array($property['value']['className'], ['Array', 'Object'])
                 ) {
-                    $return[$property['name']] = $this->fetchObjectProperties($value);
+                    $return[$property['name']] = $this->fetchObjectProperties($property['value']);
                 } else {
-                    if ($value['type'] === 'number' && !array_key_exists('value', $value) &&
-                        array_key_exists('unserializableValue', $value) && $value['unserializableValue'] === '-0') {
-                        $return[$property['name']] = 0;
-                    } elseif (!array_key_exists('value', $value)) {
-                        throw new DriverException('Property value not set');
-                    } else {
-                        $return[$property['name']] = $value['value'];
-                    }
+                    $return[$property['name']] = $property['value']['value'];
                 }
             }
         }
@@ -1314,7 +1285,7 @@ JS;
 
         foreach ($windows as $window) {
             if ($window['id'] == $window_id) {
-                $this->page = new ChromePage($window['webSocketDebuggerUrl'], isset($this->options['socketTimeout']) ? $this->options['socketTimeout'] : 10);
+                $this->page = new ChromePage($window['webSocketDebuggerUrl'], isset($this->options['socketTimeout']) ? $this->options['socketTimeout'] : null);
                 $this->page->connect();
                 $this->current_window = $window_id;
                 $this->document = 'document';
@@ -1332,10 +1303,8 @@ JS;
 
     protected function waitForDom()
     {
-        if (!$this->page->hasJavascriptDialog()) {
-            $this->wait($this->domWaitTimeout, 'document.readyState == "complete"');
-            $this->page->waitForLoad();
-        }
+        $this->wait(3000, 'document.readyState == "complete"');
+        $this->page->waitForLoad();
     }
 
     /**
@@ -1399,6 +1368,10 @@ JS;
      */
     public function captureScreenshot($filename, $options = [])
     {
+        if (false === $this->browser->isHeadless()) {
+            throw new \RuntimeException('Page.captureScreenshot is only available in headless mode.');
+        }
+
         $response = $this->page->send('Page.captureScreenshot', $options);
 
         if (false === array_key_exists('data', $response) || false === $imageData = base64_decode($response['data'])) {

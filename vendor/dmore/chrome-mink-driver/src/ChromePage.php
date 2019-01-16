@@ -56,15 +56,6 @@ class ChromePage extends DevToolsConnection
                     return $this->page_ready;
                 });
             } catch (StreamReadException $exception) {
-                if ($exception->isTimedOut() && false === $this->canDevToolsConnectionBeEstablished()) {
-                    throw new \RuntimeException(
-                        sprintf(
-                            'Chrome is unreachable via "%s" and might have crashed. Please see docs/troubleshooting.md',
-                            $this->getUrl()
-                        )
-                    );
-                }
-
                 if (!$exception->isEof() && $exception->isTimedOut()) {
                     $this->waitForLoad();
                 }

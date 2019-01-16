@@ -14,6 +14,7 @@
 
 # /config.php
 
+docker-secrets.yml
 
 .idea/*
 !.idea/php.xml

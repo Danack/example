@@ -22,23 +22,6 @@ abstract class DevToolsConnection
         $this->socket_timeout = $socket_timeout;
     }
 
-    public function canDevToolsConnectionBeEstablished()
-    {
-        $url = 'http://127.0.0.1:9222/json/version';
-        $c = curl_init($url);
-        curl_setopt($c, CURLOPT_RETURNTRANSFER, 1);
-        curl_setopt($c, CURLOPT_FOLLOWLOCATION, 1);
-        $s = curl_exec($c);
-        curl_close($c);
-
-        return $s !== false && strpos($s, 'Chrome') !== false;
-    }
-
-    protected function getUrl()
-    {
-        return $this->url;
-    }
-    
     public function connect($url = null)
     {
         $url = $url == null ? $this->url : $url;

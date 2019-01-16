@@ -97,6 +97,9 @@ services:
       - "8080:8080"
     volumes:
       - .:/var/www
+  twilio:
+    build: docker/twilio
+
 
 # https://rskuipers.com/entry/file-permissions-with-docker-on-linux
 # fpm:

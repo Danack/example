@@ -17,7 +17,7 @@ class ChromeDriverConfig extends AbstractConfig
      */
     public function createDriver()
     {
-        return new ChromeDriver($_SERVER['CHROME_URL'], null, $_SERVER['WEB_FIXTURES_HOST'], ['socketTimeout' => 1]);
+        return new ChromeDriver($_SERVER['CHROME_URL'], null, $_SERVER['WEB_FIXTURES_HOST']);
     }
 
     /**
