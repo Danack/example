@@ -97,6 +97,8 @@ services:
       - "8080:8080"
     volumes:
       - .:/var/www
+  test:
+      build: docker/test
   twilio:
     build: docker/twilio
 
