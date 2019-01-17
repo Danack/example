@@ -98,7 +98,9 @@ services:
     volumes:
       - .:/var/www
   test:
-      build: docker/test
+    build: docker/test
+    volumes:
+      - .:/github/workspace
   twilio:
     build: docker/twilio
 

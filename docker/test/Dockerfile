@@ -19,7 +19,9 @@ RUN  apt-get update -qq \
 
 # WORKDIR /var/app
 
-# CMD ["sh", "/var/app/runAllTests.sh"]
+WORKDIR /github/workspace
 
-CMD ls -l && pwd && echo $(find . -name readme_xdebug.md -exec dirname {} \;) && echo "okay"
+CMD ["sh", "runAllTests.sh"]
+
+# CMD ls -l && pwd && echo $(find . -name readme_xdebug.md -exec dirname {} \;) && echo "okay"
 
