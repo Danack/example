@@ -6,8 +6,6 @@ namespace ParamsTest\Params;
 
 use VarMap\ArrayVarMap;
 use ParamsTest\BaseTestCase;
-//use ParamsTest\Params\ArticleGetIndexParams;
-//use Foobar\Api\Ordering;
 use ParamsExample\GetArticlesParams;
 
 /**

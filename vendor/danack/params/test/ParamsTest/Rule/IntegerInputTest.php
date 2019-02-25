@@ -7,7 +7,9 @@ namespace ParamsTest\Rule;
 use Params\Rule\IntegerInput;
 use ParamsTest\BaseTestCase;
 
-
+/**
+ * @coversNothing
+ */
 class IntegerInputValidatorTest extends BaseTestCase
 {
     public function provideIntValueWorksCases()

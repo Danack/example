@@ -12,19 +12,17 @@
 /**
  * Represents a security policy which need to be enforced when sandbox mode is enabled.
  *
- * @final
- *
  * @author Fabien Potencier <fabien@symfony.com>
  */
-class Twig_Sandbox_SecurityPolicy implements Twig_Sandbox_SecurityPolicyInterface
+final class Twig_Sandbox_SecurityPolicy implements Twig_Sandbox_SecurityPolicyInterface
 {
-    protected $allowedTags;
-    protected $allowedFilters;
-    protected $allowedMethods;
-    protected $allowedProperties;
-    protected $allowedFunctions;
+    private $allowedTags;
+    private $allowedFilters;
+    private $allowedMethods;
+    private $allowedProperties;
+    private $allowedFunctions;
 
-    public function __construct(array $allowedTags = array(), array $allowedFilters = array(), array $allowedMethods = array(), array $allowedProperties = array(), array $allowedFunctions = array())
+    public function __construct(array $allowedTags = [], array $allowedFilters = [], array $allowedMethods = [], array $allowedProperties = [], array $allowedFunctions = [])
     {
         $this->allowedTags = $allowedTags;
         $this->allowedFilters = $allowedFilters;
@@ -45,9 +43,9 @@ class Twig_Sandbox_SecurityPolicy implements Twig_Sandbox_SecurityPolicyInterfac
 
     public function setAllowedMethods(array $methods)
     {
-        $this->allowedMethods = array();
+        $this->allowedMethods = [];
         foreach ($methods as $class => $m) {
-            $this->allowedMethods[$class] = array_map('strtolower', is_array($m) ? $m : array($m));
+            $this->allowedMethods[$class] = array_map('strtolower', is_array($m) ? $m : [$m]);
         }
     }
 
@@ -84,7 +82,7 @@ class Twig_Sandbox_SecurityPolicy implements Twig_Sandbox_SecurityPolicyInterfac
 
     public function checkMethodAllowed($obj, $method)
     {
-        if ($obj instanceof Twig_TemplateInterface || $obj instanceof Twig_Markup) {
+        if ($obj instanceof Twig_Template || $obj instanceof Twig_Markup) {
             return true;
         }
 
@@ -109,7 +107,7 @@ class Twig_Sandbox_SecurityPolicy implements Twig_Sandbox_SecurityPolicyInterfac
         $allowed = false;
         foreach ($this->allowedProperties as $class => $properties) {
             if ($obj instanceof $class) {
-                $allowed = in_array($property, is_array($properties) ? $properties : array($properties));
+                $allowed = in_array($property, is_array($properties) ? $properties : [$properties]);
 
                 break;
             }

@@ -18,12 +18,12 @@ class RedisPrintUrlToPdfQueue implements PrintUrlToPdfQueue
 
     public function pushPrintUrlToPdfJob(PrintUrlToPdfJob $invoicePdfJob)
     {
-        $json = json_encode($invoicePdfJob->toArray());
+        $json = json_encode_safe($invoicePdfJob->toArray());
         $keyname = PrintUrlToPdfJobJobKey::getKeyPrefix();
         $this->redis->rPush($keyname, $json);
     }
 
-    public function getPrintUrlToPdfJob($timeout): ?PrintUrlToPdfJob
+    public function getPrintUrlToPdfJob(int $timeout): ?PrintUrlToPdfJob
     {
         $keyname = PrintUrlToPdfJobJobKey::getKeyPrefix();
 
@@ -32,11 +32,6 @@ class RedisPrintUrlToPdfQueue implements PrintUrlToPdfQueue
         // where an element was popped and the second element being the value of
         // the popped element.
         $redisData = $this->redis->blpop([$keyname], $timeout);
-
-        //Pop timed out rather than got a task
-        if ($redisData === null) {
-            return null;
-        }
 
         if (count($redisData) === 0) {
             return null;

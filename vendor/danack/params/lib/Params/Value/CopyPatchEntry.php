@@ -13,15 +13,15 @@ class CopyPatchEntry implements PatchEntry
     /** @var string */
     private $path;
 
-    /** @var string|null */
+    /** @var string */
     private $from;
 
     /**
      * CopyPatchEntry constructor.
      * @param string $path
-     * @param null|string $from
+     * @param string $from
      */
-    public function __construct(string $path, ?string $from)
+    public function __construct(string $path, string $from)
     {
         $this->path = $path;
         $this->from = $from;

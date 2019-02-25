@@ -5,7 +5,7 @@ php:
     - 7.1
 
 script:
-    - composer install
+    - composer update
     - sh runCodeSniffer.sh
     - sh runTests.sh
 

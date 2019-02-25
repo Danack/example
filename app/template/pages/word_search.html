@@ -1,0 +1,22 @@
+{% extends "base.html" %}
+
+{% block page_body %}
+  <h1>Word search using react</h1>
+
+
+  <p>This is a word search written using React. </p>
+
+  <p>The React/JSX code is in ./example/app/public/js/word_search.jsx</p>
+
+  <p>It currently gets compiled to normal JavaScript by the Babel transformer by adding the type `"text/babel"` to the script tag that loads the file. e.g.  &lt;script src="/js/word_search.jsx" type="text/babel"&gt;&lt;/script&gt;   </p>
+
+  <p>
+    The React widget is looks for an element with the id of 'word_search' and then binds the React widget into that element. e.g. &lt;div id="word_search"&gt;&lt;/div&gt;
+  </p>
+
+
+
+  <div id="word_search"></div>
+
+
+{% endblock %}

@@ -6,9 +6,15 @@
   "require": {
     "danack/var-map": "^0.6.0"
   },
+  "repositories": [
+    {
+      "type": "vcs",
+      "url": "https://github.com/sebastianbergmann/phpunit"
+    }
+  ],
   "require-dev": {
     "infection/infection": "^0.8.2",
-    "phpunit/phpunit": "^6.5.8",
+    "phpunit/phpunit": "dev-master",
     "psr/http-message": "^1.0",
     "squizlabs/php_codesniffer": "^2.8",
     "yoast/yoastcs": "0.4.2"

@@ -10,6 +10,7 @@ use Danack\Console\Input\InputArgument;
 function add_console_commands(Application $console)
 {
     addDebugCommands($console);
+    addSetupCommands($console);
     addProcessCommands($console);
 }
 
@@ -21,8 +22,15 @@ function addDebugCommands(Application $console)
     $command = new Command('debug:hello', 'Example\CliController\Debug::hello');
     $command->setDescription("Test cli commands are working.");
     $console->add($command);
+
 }
 
+function addSetupCommands(Application $console)
+{
+    $command = new Command('setup:load_words', 'Example\CliController\Setup::loadWords');
+    $command->setDescription("Loads the words from file in ./data/words.txt into the database.");
+    $console->add($command);
+}
 
 
 /**

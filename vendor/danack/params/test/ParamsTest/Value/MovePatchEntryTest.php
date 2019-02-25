@@ -9,8 +9,14 @@ use Params\Value\PatchEntry;
 use Params\Value\MovePatchEntry;
 use Params\Exception\LogicException;
 
+/**
+ * @coversNothing
+ */
 class MovePatchEntryTest extends BaseTestCase
 {
+    /**
+     * @covers \Params\Value\MovePatchEntry
+     */
     public function testFoo()
     {
         $path = '/a/b/c';

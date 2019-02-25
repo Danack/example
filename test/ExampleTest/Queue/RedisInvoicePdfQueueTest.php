@@ -4,7 +4,6 @@ declare(strict_types=1);
 
 namespace ExampleTest\Queue;
 
-use Example\Model\Invoice;
 use Example\Queue\PrintUrlToPdfJob;
 use ExampleTest\BaseTestCase;
 use Example\Queue\RedisPrintUrlToPdfQueue;
@@ -22,13 +21,18 @@ class RedisInvoicePdfQueueTest extends BaseTestCase
         $existingPdfJob = $pdfQueue->getPrintUrlToPdfJob(1);
         $this->assertNull($existingPdfJob);
 
-        $invoiceId = 312321312312312312313;
+        $url = 'http://www.google.com/';
+        $filename = 'foobar.txt';
 
-        $invoice = new Invoice($invoiceId);
-        $invoicePdfJob = new PrintUrlToPdfJob($invoice);
+        $invoicePdfJob = new PrintUrlToPdfJob($url, $filename);
         $pdfQueue->pushPrintUrlToPdfJob($invoicePdfJob);
 
-        $invoiceFromQueue = $existingPdfJob = $pdfQueue->getPrintUrlToPdfJob(5);
-        $this->assertEquals($invoiceId, $invoiceFromQueue);
+        $printUrlToPdfJob = $pdfQueue->getPrintUrlToPdfJob(5);
+
+        $this->assertEquals($url, $printUrlToPdfJob->getUrl());
+        $this->assertEquals($filename, $printUrlToPdfJob->getFilename());
+
+        $existingPdfJob = $pdfQueue->getPrintUrlToPdfJob(1);
+        $this->assertNull($existingPdfJob);
     }
 }

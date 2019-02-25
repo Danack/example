@@ -5,7 +5,7 @@ declare(strict_types=1);
 use Auryn\Injector;
 use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\ServerRequestInterface;
-use Danack\SlimAurynInvoker\RouteParams as InvokerRouteParams;
+use SlimAuryn\RouteParams as InvokerRouteParams;
 
 function getReasonPhrase(int $status)
 {
@@ -29,35 +29,4 @@ function exampleResponseMapper(\Example\Response\Response $builtResponse, Respon
     $response->getBody()->write($builtResponse->getBody());
 
     return $response;
-}
-
-/**
- * @param Injector $injector
- * @param ServerRequestInterface $request
- * @param ResponseInterface $response
- * @param array $routeArguments
- * @throws \Auryn\ConfigException
- */
-function setupSlimAurynInvoker(
-    Injector $injector,
-    ServerRequestInterface $request,
-    ResponseInterface $response,
-    array $routeArguments
-) {
-    $injector->alias(ServerRequestInterface::class, get_class($request));
-    $injector->share($request);
-    $injector->alias(ResponseInterface::class, get_class($response));
-    $injector->share($response);
-    foreach ($routeArguments as $key => $value) {
-        $injector->defineParam($key, $value);
-    }
-
-    $invokerRouteParams = new InvokerRouteParams($routeArguments);
-    $injector->share($invokerRouteParams);
-
-    $psr7WithRouteParams = \VarMap\Psr7InputMapWithVarMap::createFromRequestAndVarMap(
-        $request,
-        new \VarMap\ArrayVarMap($routeArguments)
-    );
-    $injector->share($psr7WithRouteParams);
 }

@@ -6,8 +6,14 @@ namespace ParamsTest;
 
 use Params\ValueInput;
 
+/**
+ * @coversNothing
+ */
 class PatchTest extends BaseTestCase
 {
+    /**
+     * @covers \ParamsTest\PatchNameParams::getName
+     */
     public function testExtractingName()
     {
         $json = <<< JSON
@@ -16,8 +22,8 @@ class PatchTest extends BaseTestCase
 ]
 JSON;
         $input = new ValueInput(json_decode($json, true));
-        $updateWatchlistParams = PatchNameParams::createFromInput($input);
-        $name = $updateWatchlistParams->getName();
+        $params = PatchNameParams::createFromInput($input);
+        $name = $params->getName();
 
         $this->assertEquals("some updated name", $name);
     }

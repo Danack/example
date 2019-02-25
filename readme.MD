@@ -125,3 +125,7 @@ All of the injection parameters are in the injectionParams directory. There shou
 * Put session support back in
     "bryanjhv/slim-session": "^3.2",
     "ezimuel/php-secure-session": "v1.0.1",
+    
+    
+    
+    http://wordlist.aspell.net/

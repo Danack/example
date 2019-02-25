@@ -7,6 +7,9 @@ namespace ParamsTest\Rule;
 use ParamsTest\BaseTestCase;
 use Params\Rule\PositiveInt;
 
+/**
+ * @coversNothing
+ */
 class PositiveIntTest extends BaseTestCase
 {
     public function provideTestCases()

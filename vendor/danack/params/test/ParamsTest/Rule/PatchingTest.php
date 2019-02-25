@@ -18,6 +18,9 @@ use Params\Value\ReplacePatchEntry;
 use Params\Value\TestPatchEntry;
 use Params\Value\PatchEntries;
 
+/**
+ * @coversNothing
+ */
 class PatchingTest extends BaseTestCase
 {
     private function getPatchEntries($json) : PatchEntries
@@ -29,19 +32,18 @@ class PatchingTest extends BaseTestCase
         }
 
         $input = new ValueInput($data);
-
         $patchRule = new Patch($input, PatchEntry::ALL_OPS);
-
         $validationResult = $patchRule('foo', null);
-
         $this->assertNull($validationResult->getProblemMessage());
-
         $patchEntries = $validationResult->getValue();
 
         /** @var $patchEntries \Params\Value\PatchEntries */
         return $patchEntries;
     }
 
+    /**
+     * @covers \Params\Value\AddPatchEntry
+     */
     public function testAddPatchEntry()
     {
         $json = <<< JSON
@@ -61,6 +63,9 @@ JSON;
         $this->assertEquals("/a/b/c", $addPatchEntry->getPath());
     }
 
+    /**
+     * @covers \Params\Value\CopyPatchEntry
+     */
     public function testCopyPatchEntry()
     {
         $json = <<< JSON
@@ -80,6 +85,9 @@ JSON;
         $this->assertEquals("/a/b/e", $addPatchEntry->getPath());
     }
 
+    /**
+     * @covers \Params\Value\MovePatchEntry
+     */
     public function testMovePatchEntry()
     {
         $json = <<< JSON
@@ -99,7 +107,9 @@ JSON;
     }
 
 
-
+    /**
+     * @covers \Params\Value\RemovePatchEntry
+     */
     public function testRemovePatchEntry()
     {
         $json = <<< JSON
@@ -118,6 +128,9 @@ JSON;
         $this->assertEquals("/a/b/c", $addPatchEntry->getPath());
     }
 
+    /**
+     * @covers \Params\Value\ReplacePatchEntry
+     */
     public function testReplacePatchEntry()
     {
         $json = <<< JSON
@@ -137,6 +150,9 @@ JSON;
         $this->assertEquals(42, $addPatchEntry->getValue());
     }
 
+    /**
+     * @covers \Params\Value\TestPatchEntry
+     */
     public function testTestPatchEntry()
     {
         $json = <<< JSON
@@ -156,10 +172,18 @@ JSON;
         $this->assertEquals("foo", $addPatchEntry->getValue());
     }
 
+    public function provideAsBothObjAndArray()
+    {
+        return [
+            [true],
+            [false]
+        ];
+    }
+
     /**
-     * @covers \Params\Rule\ValidDatetime
+     * @dataProvider provideAsBothObjAndArray
      */
-    public function testValidationWorks()
+    public function testValidationWorks($asArray)
     {
 
         $json = <<< JSON
@@ -174,7 +198,7 @@ JSON;
 
 JSON;
 
-        $data = json_decode($json, true);
+        $data = json_decode($json, $asArray);
         $input = new ValueInput($data);
         $patchRule = new Patch($input, PatchEntry::ALL_OPS);
         $validationResult = $patchRule('foo', null);
@@ -182,10 +206,6 @@ JSON;
         $this->assertNull($validationResult->getProblemMessage());
     }
 
-
-    /**
-     * @covers \Params\Rule\ValidDatetime
-     */
     public function testReplaceMissingValue()
     {
         $data = [[
@@ -199,5 +219,18 @@ JSON;
         $validationResult = $patchRule('foo', null);
 
         $this->assertNotNull($validationResult->getProblemMessage());
+    }
+
+    public function testCorrectEntryHasError()
+    {
+        $data = [
+            ["op" => "replace", "path" => "/a/b/c", "value" => 42], // correct
+            'foobar' // not valid path entry
+        ];
+        $input = new ValueInput($data);
+        $patchRule = new Patch($input, PatchEntry::ALL_OPS);
+
+        $validationResult = $patchRule('foo', null);
+        $this->assertContains('Error for entry 1', $validationResult->getProblemMessage());
     }
 }

@@ -13,7 +13,7 @@ class InvoiceList
     {
         $repo = new FakeInvoiceRepo();
 
-        /** @var  $invoices Invoice[] */
+        /** @var  Invoice[] $invoices  */
         $invoices = [
             $repo->getInvoice(0)
         ];

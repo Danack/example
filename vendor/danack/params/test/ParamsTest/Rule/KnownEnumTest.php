@@ -7,6 +7,9 @@ namespace ParamsTest\Rule;
 use ParamsTest\BaseTestCase;
 use Params\Rule\Enum;
 
+/**
+ * @coversNothing
+ */
 class KnownEnumValidatorTest extends BaseTestCase
 {
     public function provideTestCases()

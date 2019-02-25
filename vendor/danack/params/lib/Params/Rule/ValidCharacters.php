@@ -12,6 +12,7 @@ use Params\OpenApi\ParamDescription;
  * Class ValidCharacters
  *
  * Checks that an input string contains only valid characters.
+ * Flags used for preg_match are xu
  *
  */
 class ValidCharacters implements Rule
@@ -28,7 +29,8 @@ class ValidCharacters implements Rule
 
     public function __invoke(string $name, $value): ValidationResult
     {
-        $patternInvalidCharacters = "/[^" . $this->patternValidCharacters . "]+/";
+
+        $patternInvalidCharacters = "/[^" . $this->patternValidCharacters . "]+/xu";
         $matches = [];
         $count = preg_match($patternInvalidCharacters, $value, $matches, PREG_OFFSET_CAPTURE);
 

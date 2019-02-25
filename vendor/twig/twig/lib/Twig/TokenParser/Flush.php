@@ -13,14 +13,12 @@
  * Flushes the output to the client.
  *
  * @see flush()
- *
- * @final
  */
-class Twig_TokenParser_Flush extends Twig_TokenParser
+final class Twig_TokenParser_Flush extends Twig_TokenParser
 {
     public function parse(Twig_Token $token)
     {
-        $this->parser->getStream()->expect(Twig_Token::BLOCK_END_TYPE);
+        $this->parser->getStream()->expect(/* Twig_Token::BLOCK_END_TYPE */ 3);
 
         return new Twig_Node_Flush($token->getLine(), $this->getTag());
     }

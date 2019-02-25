@@ -21,10 +21,12 @@ use const T_DIV_EQUAL;
 use const T_DO;
 use const T_DOUBLE_ARROW;
 use const T_DOUBLE_COLON;
+use const T_DOUBLE_QUOTED_STRING;
 use const T_ELSEIF;
 use const T_EQUAL;
 use const T_FOR;
 use const T_FOREACH;
+use const T_HEREDOC;
 use const T_IF;
 use const T_INC;
 use const T_LIST;
@@ -32,7 +34,6 @@ use const T_MINUS_EQUAL;
 use const T_MOD_EQUAL;
 use const T_MUL_EQUAL;
 use const T_OBJECT_OPERATOR;
-use const T_OPEN_PARENTHESIS;
 use const T_OPEN_SHORT_ARRAY;
 use const T_OPEN_TAG;
 use const T_OR_EQUAL;
@@ -340,6 +341,13 @@ class UnusedVariableSniff implements Sniff
 		}
 
 		for ($i = $tokens[$loopPointer]['scope_opener'] + 1; $i < $tokens[$loopPointer]['scope_closer']; $i++) {
+			if (
+				in_array($tokens[$i]['code'], [T_DOUBLE_QUOTED_STRING, T_HEREDOC], true)
+				&& VariableHelper::isUsedInScopeInString($phpcsFile, $variablePointer, $i)
+			) {
+				return true;
+			}
+
 			if ($tokens[$i]['code'] !== T_VARIABLE) {
 				continue;
 			}
@@ -412,17 +420,12 @@ class UnusedVariableSniff implements Sniff
 
 		$tokens = $phpcsFile->getTokens();
 
-		$parenthesisOpenerPointer = TokenHelper::findPrevious($phpcsFile, T_OPEN_PARENTHESIS, $variablePointer - 1);
-		if ($parenthesisOpenerPointer === null) {
-			return false;
+		$parenthesisOwnerPointer = $this->findNestedParenthesisWithOwner($phpcsFile, $variablePointer);
+		if ($parenthesisOwnerPointer !== null && $tokens[$parenthesisOwnerPointer]['code'] === T_FOREACH) {
+			return true;
 		}
 
-		if ($tokens[$parenthesisOpenerPointer]['parenthesis_closer'] < $variablePointer) {
-			return false;
-		}
-
-		return array_key_exists('parenthesis_owner', $tokens[$parenthesisOpenerPointer])
-			&& $tokens[$tokens[$parenthesisOpenerPointer]['parenthesis_owner']]['code'] === T_FOREACH;
+		return false;
 	}
 
 	private function isStaticVariable(File $phpcsFile, int $functionPointer, string $variableName): bool

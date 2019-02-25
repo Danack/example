@@ -21,6 +21,8 @@ class SkipIfNull implements Rule
 
     public function updateParamDescription(ParamDescription $paramDescription)
     {
-        // Does nothing?
+        // If we are allowing null, then parameter must be nullable
+        // right?
+        $paramDescription->setNullAllowed();
     }
 }

@@ -1,10 +1,13 @@
 <?php
 
-use Danack\SlimAurynInvoker\SlimAurynInvokerFactory;
+use SlimAuryn\SlimAurynInvokerFactory;
+use SlimAurynExample\AllRoutesMiddleware;
+use SlimAuryn\ExceptionMiddleware;
 
 error_reporting(E_ALL);
 
 require_once __DIR__ . "/../../vendor/autoload.php";
+require_once __DIR__ . '/../factories.php';
 require_once __DIR__ . '/../functions.php';
 require_once __DIR__ . '/../injectionParams.php';
 require_once __DIR__ . '/../routes.php';
@@ -23,13 +26,19 @@ $injector->share($injector);
 // Create the app with the container set to use SlimAurynInvoker
 // for the 'foundHandler'.
 $container = new \Slim\Container;
-$container['foundHandler'] = new SlimAurynInvokerFactory($injector);
+$container['foundHandler'] = $injector->make(SlimAurynInvokerFactory::class);
 $app = new \Slim\App($container);
 
-// Configure any middlewares here.
+// Configure any middlewares that should be applied to all routes here.
+$app->add(new AllRoutesMiddleware());
+
+// Create a middleware that catches all otherwise uncaught application
+// level exceptions.
+$app->add($injector->make(ExceptionMiddleware::class));
+
 
 // Setup the routes for the app
-setupBasicRoutes($app);
+setupRoutes($app);
 
 // Run!
 $app->run();

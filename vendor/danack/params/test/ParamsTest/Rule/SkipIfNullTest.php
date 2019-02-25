@@ -7,6 +7,9 @@ namespace ParamsTest\Rule;
 use ParamsTest\BaseTestCase;
 use Params\Rule\SkipIfNull;
 
+/**
+ * @coversNothing
+ */
 class SkipIfNullTest extends BaseTestCase
 {
     public function provideTestCases()

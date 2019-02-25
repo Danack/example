@@ -7,6 +7,9 @@ namespace ParamsTest\Rule;
 use ParamsTest\BaseTestCase;
 use Params\Rule\AlwaysEndsRule;
 
+/**
+ * @coversNothing
+ */
 class AlwaysEndsRuleTest extends BaseTestCase
 {
     /**

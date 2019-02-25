@@ -12,6 +12,10 @@ require_once __DIR__ . '/functions.php';
 require_once __DIR__ . '/slim_functions.php';
 require_once __DIR__ . '/twig_functions.php';
 
+use SlimAuryn\ExceptionMiddleware;
+use SlimAuryn\SlimAurynInvokerFactory;
+use SlimAuryn\Routes;
+
 set_error_handler('saneErrorHandler');
 
 $injector = new Auryn\Injector();
@@ -20,7 +24,15 @@ $injectionParams->addToInjector($injector);
 $injector->share($injector);
 
 try {
+    $container = new \Slim\Container;
+    $injector->share($container);
+
+    $container['foundHandler'] = $injector->make(SlimAurynInvokerFactory::class);
+
     $app = $injector->make(\Slim\App::class);
+    $routes = $injector->make(Routes::class);
+    $routes->setupRoutes($app);
+
     $app->run();
 }
 catch (\Exception $exception) {

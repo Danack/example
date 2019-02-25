@@ -7,12 +7,14 @@ namespace ParamsTest\Exception\Validator;
 use ParamsTest\BaseTestCase;
 use Params\Exception\ValidationException;
 
+/**
+ * @covers \Params\Exception\ValidationException
+ */
 class ValidationExceptionTest extends BaseTestCase
 {
     public function testDoesNotThrow()
     {
         ValidationException::throwIfProblems("Validation problems", []);
-
     }
 
     public function testGetting()

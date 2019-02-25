@@ -8,6 +8,9 @@ use Params\Rule;
 use Params\ValidationResult;
 use Params\OpenApi\ParamDescription;
 
+/**
+ * Used for testing.
+ */
 class AlwaysEndsRule implements Rule
 {
     private $finalResult;

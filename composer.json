@@ -3,9 +3,9 @@
         "airbrake/phpbrake": "^0.6.0",
         "danack/AurynConfig": "^0.9.1",
         "danack/console": "^2.6",
-        "danack/esprintf": "^0.5.0",
-        "danack/params": "^0.3.6",
-        "danack/slim-auryn-invoker": "^1.1.0",
+        "danack/esprintf": "^1.0.0",
+        "danack/params": "^0.4.0",
+        "danack/slim-auryn-invoker": "^2.0.1",
         "dmore/behat-chrome-extension": "^1.2",
         "dmore/chrome-mink-driver": "2.6",
         "doctrine/orm": "v2.5.6",
@@ -21,7 +21,7 @@
         "seld/jsonlint": "^1.7",
         "slim/slim": "3.7.0",
         "stripe/stripe-php": "^5.1",
-        "twig/twig": "^1.33",
+        "twig/twig": "^2.6.2",
         "twilio/sdk": "^5.23",
         "zendframework/zend-diactoros": "^2.0.0",
         "zendframework/zend-escaper": "^2.5"
@@ -57,5 +57,9 @@
         "platform": {
             "php": "7.2"
         }
-    }
+    },
+    "repositories": [{
+      "type": "vcs",
+      "url": "https://github.com/Danack/SlimAurynInvoker.git"
+    }]
 }

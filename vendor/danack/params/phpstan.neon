@@ -2,4 +2,5 @@ parameters:
   bootstrap: null
   autoload_files: null
   excludes_analyse:
-    - */GetArticlesParams.php
+    - *GetArticlesParams*
+    - *CreateFromVarMap*

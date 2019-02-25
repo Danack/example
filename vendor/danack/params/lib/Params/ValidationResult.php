@@ -55,9 +55,6 @@ class ValidationResult
         return new self($value, null, true);
     }
 
-    /**
-     * @return string
-     */
     public function getValue()
     {
         return $this->value;

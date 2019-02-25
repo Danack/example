@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Params\Rule;
 
 use Params\Input;
+use Params\OpenApi\ParamDescription;
 use Params\ValidationResult;
 use Params\Value\AddPatchEntry;
 use Params\Value\CopyPatchEntry;
@@ -14,8 +15,10 @@ use Params\Value\PatchEntries;
 use Params\Value\RemovePatchEntry;
 use Params\Value\ReplacePatchEntry;
 use Params\Value\TestPatchEntry;
+use Params\Rule;
+use Params\Functions;
 
-class Patch
+class Patch implements Rule
 {
     /** @var Input  */
     private $input;
@@ -79,7 +82,7 @@ class Patch
 
     private function createPatchEntryForArray($op, $path, $patchEntryInput)
     {
-        if (in_array($op, $this->allowedOps, true) !== true) {
+        if (Functions::array_value_exists($this->allowedOps, $op) !== true) {
             $message = sprintf(
                 "Op '%s' is not supported for this endpoint.",
                 $op
@@ -213,5 +216,10 @@ class Patch
         }
 
         return ValidationResult::valueResult(new PatchEntries(...$patchEntries));
+    }
+
+    public function updateParamDescription(ParamDescription $paramDescription)
+    {
+        // TODO: Implement updateParamDescription() method.
     }
 }

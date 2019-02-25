@@ -6,7 +6,7 @@
     </php>
 
     <testsuites>
-        <testsuite name="FootyPint Test Suite">
+        <testsuite name="Example Test Suite">
             <directory>../test/</directory>
             <exclude>BaseTestCase.php</exclude> <!-- This doens't seem to work-->
         </testsuite>

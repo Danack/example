@@ -11,15 +11,15 @@
  */
 class Twig_Node_Expression_Name extends Twig_Node_Expression
 {
-    protected $specialVars = array(
-        '_self' => '$this',
+    private $specialVars = [
+        '_self' => '$this->getTemplateName()',
         '_context' => '$context',
         '_charset' => '$this->env->getCharset()',
-    );
+    ];
 
     public function __construct($name, $lineno)
     {
-        parent::__construct(array(), array('name' => $name, 'is_defined_test' => false, 'ignore_strict_check' => false, 'always_defined' => false), $lineno);
+        parent::__construct([], ['name' => $name, 'is_defined_test' => false, 'ignore_strict_check' => false, 'always_defined' => false], $lineno);
     }
 
     public function compile(Twig_Compiler $compiler)
@@ -48,45 +48,25 @@ class Twig_Node_Expression_Name extends Twig_Node_Expression
                 ->raw(']')
             ;
         } else {
-            if (PHP_VERSION_ID >= 70000) {
-                // use PHP 7 null coalescing operator
+            if ($this->getAttribute('ignore_strict_check') || !$compiler->getEnvironment()->isStrictVariables()) {
                 $compiler
                     ->raw('($context[')
                     ->string($name)
-                    ->raw('] ?? ')
+                    ->raw('] ?? null)')
                 ;
-
-                if ($this->getAttribute('ignore_strict_check') || !$compiler->getEnvironment()->isStrictVariables()) {
-                    $compiler->raw('null)');
-                } else {
-                    $compiler->raw('$this->getContext($context, ')->string($name)->raw('))');
-                }
-            } elseif (PHP_VERSION_ID >= 50400) {
-                // PHP 5.4 ternary operator performance was optimized
+            } else {
                 $compiler
                     ->raw('(isset($context[')
                     ->string($name)
-                    ->raw(']) ? $context[')
+                    ->raw(']) || array_key_exists(')
                     ->string($name)
-                    ->raw('] : ')
-                ;
-
-                if ($this->getAttribute('ignore_strict_check') || !$compiler->getEnvironment()->isStrictVariables()) {
-                    $compiler->raw('null)');
-                } else {
-                    $compiler->raw('$this->getContext($context, ')->string($name)->raw('))');
-                }
-            } else {
-                $compiler
-                    ->raw('$this->getContext($context, ')
+                    ->raw(', $context) ? $context[')
                     ->string($name)
-                ;
-
-                if ($this->getAttribute('ignore_strict_check')) {
-                    $compiler->raw(', true');
-                }
-
-                $compiler
+                    ->raw('] : (function () { throw new Twig_Error_Runtime(\'Variable ')
+                    ->string($name)
+                    ->raw(' does not exist.\', ')
+                    ->repr($this->lineno)
+                    ->raw(', $this->source); })()')
                     ->raw(')')
                 ;
             }

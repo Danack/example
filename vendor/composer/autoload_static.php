@@ -409,6 +409,13 @@ class ComposerStaticInit20f50839b078060e5006a59fe0202351
                 0 => __DIR__ . '/..' . '/twig/twig/lib',
             ),
         ),
+        'S' => 
+        array (
+            'SlimAuryn\\' => 
+            array (
+                0 => __DIR__ . '/..' . '/danack/slim-auryn-invoker/lib',
+            ),
+        ),
         'P' => 
         array (
             'Prophecy\\' => 
@@ -479,14 +486,6 @@ class ComposerStaticInit20f50839b078060e5006a59fe0202351
             'Doctrine\\Common\\Collections\\' => 
             array (
                 0 => __DIR__ . '/..' . '/doctrine/collections/lib',
-            ),
-            'Danack\\SlimAurynInvoker\\' => 
-            array (
-                0 => __DIR__ . '/..' . '/danack/slim-auryn-invoker/lib',
-            ),
-            'Danack\\Response\\' => 
-            array (
-                0 => __DIR__ . '/..' . '/danack/slim-auryn-invoker/lib',
             ),
             'Danack\\Console\\' => 
             array (

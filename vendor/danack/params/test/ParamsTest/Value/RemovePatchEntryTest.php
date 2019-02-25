@@ -9,9 +9,15 @@ use Params\Value\PatchEntry;
 use Params\Value\RemovePatchEntry;
 use Params\Exception\LogicException;
 
+/**
+ * @coversNothing
+ */
 class RemovePatchEntryTest extends BaseTestCase
 {
-    public function testFoo()
+    /**
+     * @covers \Params\Value\RemovePatchEntry
+     */
+    public function testBasic()
     {
         $path = '/a/b/c';
         $removePatch = new RemovePatchEntry($path);
@@ -28,6 +34,28 @@ class RemovePatchEntryTest extends BaseTestCase
         }
 
         $this->expectException(LogicException::class);
+        $removePatch->getValue();
+
+        $this->assertEquals("remove", $removePatch->getOp());
+    }
+
+    /**
+     * @covers \Params\Value\RemovePatchEntry::getFrom
+     */
+    public function testGetFromThrows()
+    {
+        $removePatch = new RemovePatchEntry('/a/b/c');
+        $this->expectException(\Params\Exception\LogicException::class);
+        $removePatch->getFrom();
+    }
+
+    /**
+     * @covers \Params\Value\RemovePatchEntry::getValue
+     */
+    public function testGetValueThrows()
+    {
+        $removePatch = new RemovePatchEntry('/a/b/c');
+        $this->expectException(\Params\Exception\LogicException::class);
         $removePatch->getValue();
     }
 }

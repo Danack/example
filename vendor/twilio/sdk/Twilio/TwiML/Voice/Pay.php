@@ -148,7 +148,7 @@ class Pay extends TwiML {
     /**
      * Add Currency attribute.
      * 
-     * @param pay:Enum:Currency $currency Currency of the amount attribute
+     * @param string $currency Currency of the amount attribute
      * @return TwiML $this.
      */
     public function setCurrency($currency) {

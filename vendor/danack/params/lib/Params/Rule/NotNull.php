@@ -8,9 +8,11 @@ use Params\Rule;
 use Params\ValidationResult;
 use Params\OpenApi\ParamDescription;
 
+/**
+ * @TODO - is there any point to this rule?
+ */
 class NotNull implements Rule
 {
-
     public function __invoke(string $name, $value): ValidationResult
     {
         if ($value === null) {
@@ -21,6 +23,5 @@ class NotNull implements Rule
 
     public function updateParamDescription(ParamDescription $paramDescription)
     {
-        $paramDescription->setNotNull();
     }
 }

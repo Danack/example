@@ -17,7 +17,7 @@ use Twilio\Rest\Authy\V1;
  * @property \Twilio\Rest\Authy\V1 v1
  * @property \Twilio\Rest\Authy\V1\FormList forms
  * @property \Twilio\Rest\Authy\V1\ServiceList services
- * @method \Twilio\Rest\Authy\V1\FormContext forms(string $type)
+ * @method \Twilio\Rest\Authy\V1\FormContext forms(string $formType)
  * @method \Twilio\Rest\Authy\V1\ServiceContext services(string $sid)
  */
 class Authy extends Domain {
@@ -87,11 +87,11 @@ class Authy extends Domain {
     }
 
     /**
-     * @param string $type The Type of this Form
+     * @param string $formType The Type of this Form
      * @return \Twilio\Rest\Authy\V1\FormContext 
      */
-    protected function contextForms($type) {
-        return $this->v1->forms($type);
+    protected function contextForms($formType) {
+        return $this->v1->forms($formType);
     }
 
     /**

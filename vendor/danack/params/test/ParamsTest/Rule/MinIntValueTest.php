@@ -7,6 +7,9 @@ namespace ParamsTest\Rule;
 use ParamsTest\BaseTestCase;
 use Params\Rule\MinIntValue;
 
+/**
+ * @coversNothing
+ */
 class MinIntValueTest extends BaseTestCase
 {
     public function provideMinIntValueCases()

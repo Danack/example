@@ -9,6 +9,9 @@ use VarMap\ArrayVarMap;
 use ParamsTest\BaseTestCase;
 use Params\Rule\GetStringOrDefault;
 
+/**
+ * @coversNothing
+ */
 class GetIntOrDefaultTest extends BaseTestCase
 {
     public function provideTestCases()

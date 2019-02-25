@@ -4,6 +4,16 @@ declare(strict_types=1);
 
 namespace Esprintf {
 
+    function rawString(string $string)
+    {
+        return $string;
+    }
+
+    /**
+     * @param string $search The string that will be searched for.
+     * @return callable The callable that will do the escaping for the replacement.
+     * @throws EsprintfException
+     */
     function getEscapeCallable($search)
     {
         static $escaper = null;
@@ -11,19 +21,13 @@ namespace Esprintf {
             $escaper = new \Zend\Escaper\Escaper('utf-8');
         }
 
-        static $rawStringFn = null;
-        if ($rawStringFn === null) {
-            $rawStringFn = function (string $string) {
-                return $string;
-            };
-        }
-
         $callables = [
             ':attr_' => [$escaper, 'escapeHtmlAttr'],
             ':js_' => [$escaper, 'escapeJs'],
             ':css_' => [$escaper, 'escapeCss'],
             ':uri_' => [$escaper, 'escapeUrl'],
-            ':raw_' => $rawStringFn
+            ':raw_' => 'Esprintf\rawString',
+            ':html_' => [$escaper, 'escapeHtml']
         ];
 
         foreach ($callables as $key => $callable) {
@@ -32,9 +36,8 @@ namespace Esprintf {
             }
         }
 
-        return [$escaper, 'escapeHtml'];
+        throw EsprintfException::fromUnknownSearchString($search);
     }
-
 }
 
 namespace {
@@ -42,20 +45,21 @@ namespace {
     use Esprintf\EsprintfException;
 
     /**
-     * @param $string
-     * @param $searchReplace
-     * @return mixed
+     * @param string $string
+     * @param array $searchReplace
+     * @return string
      * @throws EsprintfException
      */
-    function esprintf($string, $searchReplace)
+    function esprintf($string, $searchReplace) : string
     {
         $escapedParams = [];
 
-        // TODO - validate array is sane
+        $count = 0;
         foreach ($searchReplace as $key => $value) {
             if (is_string($key) === false) {
-                throw new EsprintfException("escape key [$key] is not a string");
+                throw EsprintfException::fromKeyIsNotString($count, $key);
             }
+            $count += 1;
         }
 
         foreach ($searchReplace as $search => $replace) {

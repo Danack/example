@@ -10,7 +10,7 @@ trait CreateOrErrorFromVarMap
 {
     /**
      * @param VarMap $variableMap
-     * @return object|static
+     * @return array{0:object|null, 1:ValidationErrors|null}
      * @throws \Params\Exception\RulesEmptyException
      * @throws \Params\Exception\ValidationException
      */

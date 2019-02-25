@@ -9,9 +9,10 @@ require __DIR__ . "/../../vendor/autoload.php";
 
 // Handle errors
 $varmap = new ArrayVarMap(['order' => 'error']);
-[$articleGetIndexParams, $errors] = GetArticlesParams::createOrErrorFromVarMap($varmap);
+[$articleGetIndexParams, $validationErrors] = GetArticlesParams::createOrErrorFromVarMap($varmap);
 
-if (count($errors) !== 0) {
+if ($validationErrors !== null && count($validationErrors->getValidationProblems()) !== 0) {
+    $errors = $validationErrors->getValidationProblems();
     echo "There were errors creating ArticleGetIndexParams from input\n  " . implode('\n  ', $errors);
     echo "\nExample behaved as expected.\n";
     exit(0);

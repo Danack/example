@@ -7,11 +7,11 @@ php vendor/bin/phpcs --standard=./test/codesniffer.xml --encoding=utf-8 --extens
 
 php vendor/bin/phpunit -c test/phpunit.xml
 
-php phpstan.phar analyze -c ./phpstan.neon -l 7 lib
+php ./phpstan.phar analyze -c ./phpstan.neon -l 7 lib
 
 set +e
 
-php vendor/bin/infection --log-verbosity=0 --only-covered --min-covered-msi=90
+php vendor/bin/infection --configuration=infection.json.dist --log-verbosity=0 --only-covered --min-covered-msi=90
 
 infection_exit_code=$?
 

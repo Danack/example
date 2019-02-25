@@ -4,6 +4,8 @@ declare(strict_types=1);
 
 namespace Example;
 
+use Example\Config\TwigConfig;
+
 class Config
 {
     const EXAMPLE_DATABASE_INFO = ['example', 'database'];
@@ -20,6 +22,10 @@ class Config
 
     const EXAMPLE_EXCEPTION_LOGGING = ['example', 'exception_logging'];
 
+
+    const TWIG_INFO_CACHE = ['twig', 'cache'];
+    const TWIG_INFO_DEBUG = ['twig', 'debug'];
+
     public static function get($index)
     {
         return getConfig($index);
@@ -33,5 +39,13 @@ class Config
         foreach ($constants as $constant) {
             $value = getConfig($constant);
         }
+    }
+
+    public function getTwigConfig() : TwigConfig
+    {
+        return new TwigConfig(
+            getConfig(self::TWIG_INFO_CACHE),
+            getConfig(self::TWIG_INFO_DEBUG)
+        );
     }
 }

@@ -12,4 +12,13 @@ parameters:
   excludes_analyse:
     - *lib/birke/*
     - *injectionParams/*
-    - *Behat/SiteContext.php
+
+  ignoreErrors:
+    -
+      message: '#Behat\Mink\Driver\DriverInterface::switchToIFrame() expects string|null, int given.#'
+      path: *Example/Behat/SiteContext.php
+    -
+      message: '#Parameter \#7 \$paperHeight of method.*#'
+      path: *Example/CliController/PdfGenerator.php
+
+

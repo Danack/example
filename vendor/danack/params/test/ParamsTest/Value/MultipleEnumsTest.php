@@ -7,9 +7,15 @@ namespace ParamsTest\Exception\Validator;
 use ParamsTest\BaseTestCase;
 use Params\Value\MultipleEnums;
 
+/**
+ * @coversNothing
+ */
 class MultipleEnumsTest extends BaseTestCase
 {
-    public function testDoesNotThrow()
+    /**
+     * @covers \Params\Value\MultipleEnums
+     */
+    public function testBasic()
     {
         $values = [
             'foo',

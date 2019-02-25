@@ -1,29 +1,13 @@
 <?php
 
-use Slim\App;
+return [
+    ['/test_middleware/middleware_is_added',   'GET',  'SlimAurynExample\TestController::testMiddleware', 'setupRouteMiddleware'],
+    ['/test_middleware/middleware_not_added',   'GET',  'SlimAurynExample\TestController::testMiddleware'],
+    ['/test_middleware/middleware_correct_order',   'GET',  'SlimAurynExample\TestController::testMiddleware', 'setupRouteMiddlewareForOrderTest'],
 
-function setupBasicRoutes(App $app)
-{
-    $routes = [
-        ['/', 'GET', 'Danack\SlimAurynExample\ResponseController::getHomePage'],
-    ];
+    ['/test_di/interface_is_aliased',   'GET',  'SlimAurynExample\TestController::testHowFooIsMade', 'setupFooAlias' ],
+    ['/test_di/interface_is_unaliased', 'GET',  'SlimAurynExample\TestController::testHowFooIsMade' ],
+    ['/test_di/interface_is_delegated', 'GET',  'SlimAurynExample\TestController::testHowFooIsMade', 'setupFooDelegate' ],
 
-    foreach ($routes as $route) {
-        list($path, $method, $callable) = $route;
-        $app->{$method}($path, $callable);
-    }
-}
-
-
-
-function setupHtmlRoutes(App $app)
-{
-    $routes = [
-        ['/', 'GET', 'Danack\SlimAurynExample\HtmlController::getPage'],
-    ];
-
-    foreach ($routes as $route) {
-        list($path, $method, $callable) = $route;
-        $app->{$method}($path, $callable);
-    }
-}
+    ['/', 'GET', 'SlimAurynExample\ResponseController::getHomePage'],
+];

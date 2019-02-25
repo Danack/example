@@ -8,6 +8,9 @@ use VarMap\ArrayVarMap;
 use ParamsTest\BaseTestCase;
 use Params\Rule\GetOptionalInt;
 
+/**
+ * @coversNothing
+ */
 class GetOptionalIntTest extends BaseTestCase
 {
     public function provideTestCases()

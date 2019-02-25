@@ -30,7 +30,7 @@ class MinIntValue implements Rule
 
     public function updateParamDescription(ParamDescription $paramDescription)
     {
-        $paramDescription->setMaximum($this->minValue);
+        $paramDescription->setMinimum($this->minValue);
         $paramDescription->setExclusiveMinimum(false);
     }
 }

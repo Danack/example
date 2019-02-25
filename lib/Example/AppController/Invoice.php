@@ -19,11 +19,11 @@ class Invoice
 {
     /**
      * @param InvoiceRepo $invoiceRepo
-     * @param $invoice_id
+     * @param int $invoice_id
      */
     public function renderInvoice(
         InvoiceRepo $invoiceRepo,
-        $invoice_id
+        int $invoice_id
     ) {
         $html = <<< HTML
   <html>
@@ -52,7 +52,7 @@ HTML;
      * @param PrintUrlToPdfQueue $printUrlToPdfQueue
      * @param InvoiceRepo $invoiceRepo
      * @param InvoiceLocalStorage $localInvoiceStorage
-     * @param $invoice_id
+     * @param int $invoice_id
      * @return DataNoCacheResponse
      */
     public function generateOrGetDownloadLink(
@@ -84,7 +84,7 @@ HTML;
     /**
      * @param InvoiceRepo $invoiceRepo
      * @param InvoiceLocalStorage $localInvoiceStorage
-     * @param $invoice_id
+     * @param int $invoice_id
      * @return FileResponse|NotFoundResponse
      */
     public function downloadInvoice(

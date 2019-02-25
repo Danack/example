@@ -12,7 +12,6 @@
 class CustomExtensionTest extends \PHPUnit\Framework\TestCase
 {
     /**
-     * @requires PHP 5.3
      * @dataProvider provideInvalidExtensions
      */
     public function testGetInvalidOperators(Twig_ExtensionInterface $extension, $expectedExceptionMessage)
@@ -31,10 +30,10 @@ class CustomExtensionTest extends \PHPUnit\Framework\TestCase
 
     public function provideInvalidExtensions()
     {
-        return array(
-            array(new InvalidOperatorExtension(new stdClass()), '"InvalidOperatorExtension::getOperators()" must return an array with operators, got "stdClass".'),
-            array(new InvalidOperatorExtension(array(1, 2, 3)), '"InvalidOperatorExtension::getOperators()" must return an array of 2 elements, got 3.'),
-        );
+        return [
+            [new InvalidOperatorExtension(new stdClass()), '"InvalidOperatorExtension::getOperators()" must return an array with operators, got "stdClass".'],
+            [new InvalidOperatorExtension([1, 2, 3]), '"InvalidOperatorExtension::getOperators()" must return an array of 2 elements, got 3.'],
+        ];
     }
 }
 
@@ -47,47 +46,33 @@ class InvalidOperatorExtension implements Twig_ExtensionInterface
         $this->operators = $operators;
     }
 
-    public function initRuntime(Twig_Environment $environment)
-    {
-    }
-
     public function getTokenParsers()
     {
-        return array();
+        return [];
     }
 
     public function getNodeVisitors()
     {
-        return array();
+        return [];
     }
 
     public function getFilters()
     {
-        return array();
+        return [];
     }
 
     public function getTests()
     {
-        return array();
+        return [];
     }
 
     public function getFunctions()
     {
-        return array();
-    }
-
-    public function getGlobals()
-    {
-        return array();
+        return [];
     }
 
     public function getOperators()
     {
         return $this->operators;
-    }
-
-    public function getName()
-    {
-        return __CLASS__;
     }
 }

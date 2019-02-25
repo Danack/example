@@ -18,6 +18,10 @@
         <!--<exclude name="PSR2.Methods.FunctionCallSignature.MultipleArguments" />-->
     </rule>
 
+    <rule ref="Generic.Files.LineLength.TooLong">
+        <exclude-pattern>*example/routes.php</exclude-pattern>
+    </rule>
+
 
     <rule ref="../vendor/yoast/yoastcs/Yoast/Sniffs/ControlStructures/IfElseDeclarationSniff.php"/>
 </ruleset>

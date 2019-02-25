@@ -506,3 +506,46 @@ function buildInvoiceDownloadLink(\Example\Model\Invoice $invoice): string
 
     return $link;
 }
+
+
+function json_encode_safe($data, $options = 0): string
+{
+    $result = json_encode($data, $options);
+
+    if ($result === false) {
+        throw new \Exception("Failed to encode data as json: " . json_last_error_msg());
+    }
+
+    return $result;
+}
+
+
+function getAppErrorHandler($c)
+{
+    return function ($request, $response, $exception) use ($c) {
+        /** @var \Throwable $exception */
+        $text = "";
+        do {
+            $text .= $exception->getMessage() . "<br/><br/>\n\n";
+            $text .= str_replace("#", "<br/>#", nl2br($exception->getTraceAsString())). "<br/><br/>\n\n";
+        } while (($exception = $exception->getPrevious()) !== null);
+
+
+        error_log($text);
+        return $c['response']->withStatus(500)
+            ->withHeader('Content-Type', 'text/html')
+            ->write($text);
+    };
+};
+
+
+function getExceptionMappers()
+{
+    $exceptionHandlers = [
+        \Params\Exception\ValidationException::class => 'paramsValidationExceptionMapper',
+        \PDOException::class => 'pdoExceptionMapper',
+        \Example\Exception\DebuggingCaughtException::class => 'debuggingCaughtExceptionExceptionMapper'
+    ];
+
+    return $exceptionHandlers;
+}

@@ -17,13 +17,15 @@ function injectionParams()
     // Alias interfaces (or classes) to the actual types that should be used
     // where they are required.
     $aliases = [
-        Example\Route\Routes::class => Example\Route\AppRoutes::class,
         Example\Repo\BookListRepo\BookListRepo::class => Example\Repo\BookListRepo\DoctrineBookListRepo::class,
         Example\Repo\InvoiceRepo\InvoiceRepo::class => \Example\Repo\InvoiceRepo\FakeInvoiceRepo::class,
 
         \Example\Service\LocalStorage\InvoiceLocalStorage\InvoiceLocalStorage::class =>
         \Example\Service\LocalStorage\InvoiceLocalStorage\FileInvoiceLocalStorage::class,
         \Example\Queue\PrintUrlToPdfQueue::class => \Example\Queue\RedisPrintUrlToPdfQueue::class,
+
+        \Example\Repo\WordRepo\WordRepo::class =>
+        \Example\Repo\WordRepo\PdoWordRepo::class,
     ];
 
     // Delegate the creation of types to callables.
@@ -35,6 +37,12 @@ function injectionParams()
         \Twig_Environment::class => 'createTwigForSite',
         Doctrine\ORM\EntityManager::class => 'createDoctrineEntityManager',
         \Example\Service\LocalStorage\InvoiceLocalStorage\FileInvoiceLocalStorage::class => 'createFileInvoiceLocalStorage',
+        \SlimAuryn\Routes::class => 'createRoutesForApp',
+        \SlimAuryn\SlimAurynInvokerFactory::class => 'createSlimAurynInvokerFactory',
+        \SlimAuryn\ExceptionMiddleware::class => 'createExceptionMiddleware',
+
+        \Slim\Container::class => 'createSlimContainer',
+        \Slim\App::class => 'createSlimAppForApp',
     ];
 
 //    if (getConfig(['example', 'direct_sending_no_queue'], false) === true) {
@@ -60,3 +68,5 @@ function injectionParams()
 
     return $injectionParams;
 }
+
+

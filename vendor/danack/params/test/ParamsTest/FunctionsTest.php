@@ -9,6 +9,9 @@ use Params\Exception\ValidationException;
 use Params\Functions;
 use Params\Value\Ordering;
 
+/**
+ * @coversNothing
+ */
 class FunctionsTest extends BaseTestCase
 {
     public function providesNormaliseOrderParameter()
@@ -22,6 +25,7 @@ class FunctionsTest extends BaseTestCase
 
     /**
      * @dataProvider providesNormaliseOrderParameter
+     * @covers \Params\Functions::normalise_order_parameter
      */
     public function testNormaliseOrderParameter($input, $expectedName, $expectedOrder)
     {
@@ -31,7 +35,9 @@ class FunctionsTest extends BaseTestCase
         $this->assertEquals($expectedOrder, $order);
     }
 
-
+    /**
+     * @covers \Params\Functions::check_only_digits
+     */
     public function testCheckOnlyDigits()
     {
         // An integer gets short circuited
@@ -48,6 +54,9 @@ class FunctionsTest extends BaseTestCase
         $this->assertStringMatchesFormat("%sFoo%s", $errorMsg);
     }
 
+    /**
+     * @covers \Params\Functions::array_value_exists
+     */
     public function testArrayValueExists()
     {
         $values = [

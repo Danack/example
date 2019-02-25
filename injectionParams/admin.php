@@ -7,18 +7,14 @@ function injectionParams()
     // These classes will only be created once by the injector.
     $shares = [
         \Redis::class,
-        \SlimSession\Helper::class,
         \Twig_Environment::class,
         \Auryn\Injector::class,
-        \Birke\Rememberme\Authenticator::class,
     ];
 
 
     // Alias interfaces (or classes) to the actual types that should be used
     // where they are required.
     $aliases = [
-        \Example\Route\Routes::class => \Example\Route\AdminRoutes::class,
-
     ];
 
     // Delegate the creation of types to callables.
@@ -27,9 +23,12 @@ function injectionParams()
         \Twig_Environment::class => 'createTwigForAdmin',
         \PDO::class => 'createPDO',
         \Slim\App::class => 'createAppForAdmin',
+        \SlimAuryn\Routes::class => 'createRoutesForAdmin',
+        \Slim\Container::class => 'createSlimContainer',
+        \Slim\App::class => 'createSlimAppForAdmin',
     ];
 
-//
+
 //    if (getConfig(['example', 'direct_sending_no_queue']) === true) {
 //
 //    }

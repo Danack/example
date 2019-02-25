@@ -12,11 +12,7 @@ class Invoice
 
     private $amount;
 
-    /**
-     * Invoice constructor.
-     * @param $id
-     */
-    public function __construct($id)
+    public function __construct(int $id)
     {
         $this->id = $id;
         $this->work = 'You owe me money';

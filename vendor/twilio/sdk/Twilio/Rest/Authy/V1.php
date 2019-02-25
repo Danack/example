@@ -18,7 +18,7 @@ use Twilio\Version;
 /**
  * @property \Twilio\Rest\Authy\V1\FormList forms
  * @property \Twilio\Rest\Authy\V1\ServiceList services
- * @method \Twilio\Rest\Authy\V1\FormContext forms(string $type)
+ * @method \Twilio\Rest\Authy\V1\FormContext forms(string $formType)
  * @method \Twilio\Rest\Authy\V1\ServiceContext services(string $sid)
  */
 class V1 extends Version {

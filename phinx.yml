@@ -7,7 +7,7 @@ environments:
     default_database: development
     development:
         adapter: mysql
-        host: db
+        host: 10.254.254.254
         name: example
         user: example
         pass: D9cACV8Pue3CvM93

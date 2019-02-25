@@ -6,6 +6,7 @@ namespace Params;
 
 use Params\Exception\ValidationException;
 use Params\Exception\ParamsException;
+use Params\ValidationErrors;
 
 /**
  * Class ParamsValidator
@@ -58,8 +59,12 @@ class ParamsValidator
     }
 
 
-    public function getValidationProblems()
+    public function getValidationProblems(): ?ValidationErrors
     {
-        return $this->validationProblems;
+        if (count($this->validationProblems) !== 0) {
+            return new ValidationErrors($this->validationProblems);
+        }
+
+        return null;
     }
 }

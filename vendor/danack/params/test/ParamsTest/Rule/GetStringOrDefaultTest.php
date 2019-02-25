@@ -8,6 +8,9 @@ use VarMap\ArrayVarMap;
 use ParamsTest\BaseTestCase;
 use Params\Rule\GetStringOrDefault;
 
+/**
+ * @coversNothing
+ */
 class GetStringOrDefaultTest extends BaseTestCase
 {
     public function provideTestCases()

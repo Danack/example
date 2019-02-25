@@ -11,57 +11,34 @@
 
 abstract class Twig_Extension implements Twig_ExtensionInterface
 {
-    /**
-     * @deprecated since 1.23 (to be removed in 2.0), implement Twig_Extension_InitRuntimeInterface instead
-     */
-    public function initRuntime(Twig_Environment $environment)
-    {
-    }
-
     public function getTokenParsers()
     {
-        return array();
+        return [];
     }
 
     public function getNodeVisitors()
     {
-        return array();
+        return [];
     }
 
     public function getFilters()
     {
-        return array();
+        return [];
     }
 
     public function getTests()
     {
-        return array();
+        return [];
     }
 
     public function getFunctions()
     {
-        return array();
+        return [];
     }
 
     public function getOperators()
     {
-        return array();
-    }
-
-    /**
-     * @deprecated since 1.23 (to be removed in 2.0), implement Twig_Extension_GlobalsInterface instead
-     */
-    public function getGlobals()
-    {
-        return array();
-    }
-
-    /**
-     * @deprecated since 1.26 (to be removed in 2.0), not used anymore internally
-     */
-    public function getName()
-    {
-        return get_class($this);
+        return [];
     }
 }
 

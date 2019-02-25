@@ -7,6 +7,9 @@ namespace ParamsTest\Rule;
 use ParamsTest\BaseTestCase;
 use Params\Rule\NotNull;
 
+/**
+ * @coversNothing
+ */
 class NotNullTest extends BaseTestCase
 {
     /**

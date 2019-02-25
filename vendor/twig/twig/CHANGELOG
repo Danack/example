@@ -1,3 +1,169 @@
+* 2.6.2 (2019-01-14)
+
+ * fixed regression (key exists check for non ArrayObject objects)
+
+* 2.6.1 (2019-01-14)
+
+ * fixed ArrayObject access with a null value
+ * fixed embedded templates starting with a BOM
+ * fixed using a Twig_TemplateWrapper instance as an argument to extends
+ * fixed error location when calling an undefined block
+ * deprecated passing a string as a source on Twig_Error
+ * switched generated code to use the PHP short array notation
+ * fixed float representation in compiled templates
+ * added a second argument to the join filter (last separator configuration)
+
+* 2.6.0 (2018-12-16)
+
+ * made sure twig_include returns a string
+ * fixed multi-byte UFT-8 in escape('html_attr')
+ * added the "deprecated" tag
+ * added support for dynamically named tests
+ * fixed GlobalsInterface extended class
+ * fixed filesystem loader throwing an exception instead of returning false
+
+* 2.5.0 (2018-07-13)
+
+ * deprecated using the spaceless tag at the root level of a child template (noop anyway)
+ * deprecated the possibility to define a block in a non-capturing block in a child template
+ * added the Symfony ctype polyfill as a dependency
+ * fixed reporting the proper location for errors compiled in templates
+ * fixed the error handling for the optimized extension-based function calls
+ * ensured that syntax errors are triggered with the right line
+ * "js" filter now produces valid JSON
+
+* 2.4.8 (2018-04-02)
+
+ * fixed a regression when using the "default" filter or the "defined" test on non-existing arrays
+
+* 2.4.7 (2018-03-20)
+
+ * optimized runtime performance
+ * optimized parser performance by inlining the constant values
+ * fixed block names unicity
+ * fixed counting children of SimpleXMLElement objects
+ * added missing else clause to avoid infinite loops
+ * fixed .. (range operator) in sandbox policy
+
+* 2.4.6 (2018-03-03)
+
+ * fixed a regression in the way the profiler is registered in templates
+
+* 2.4.5 (2018-03-02)
+
+ * optimized the performance of calling an extension method at runtime
+ * optimized the performance of the dot operator for array and method calls
+ * added an exception when using "===" instead of "same as"
+ * fixed possible array to string conversion concealing actual error
+ * made variable names deterministic in compiled templates
+ * fixed length filter when passing an instance of IteratorAggregate
+ * fixed Environment::resolveTemplate to accept instances of TemplateWrapper
+
+* 2.4.4 (2017-09-27)
+
+ * added Twig_Profiler_Profile::reset()
+ * fixed use TokenParser to return an empty Node
+ * added RuntimeExtensionInterface
+ * added circular reference detection when loading templates
+ * added support for runtime loaders in IntegrationTestCase
+ * fixed deprecation when using Twig_Profiler_Dumper_Html
+ * removed @final from Twig_Profiler_Dumper_Text
+
+* 2.4.3 (2017-06-07)
+
+ * fixed namespaces introduction
+
+* 2.4.2 (2017-06-05)
+
+ * fixed namespaces introduction
+
+* 2.4.1 (2017-06-05)
+
+ * fixed namespaces introduction
+
+* 2.4.0 (2017-06-05)
+
+ * added support for PHPUnit 6 when testing extensions
+ * fixed PHP 7.2 compatibility
+ * fixed template name generation in Twig_Environment::createTemplate()
+ * removed final tag on Twig_TokenParser_Include
+ * dropped HHVM support
+ * added namespaced aliases for all (non-deprecated) classes and interfaces
+ * marked Twig_Filter, Twig_Function, Twig_Test, Twig_Node_Module and Twig_Profiler_Profile as final via the @final annotation
+
+* 2.3.2 (2017-04-20)
+
+ * fixed edge case in the method cache for Twig attributes
+
+* 2.3.1 (2017-04-18)
+
+ * fixed the empty() test
+
+* 2.3.0 (2017-03-22)
+
+ * fixed a race condition handling when writing cache files
+ * "length" filter now returns string length when applied to an object that does
+   not implement \Countable but provides __toString()
+ * "empty" test will now consider the return value of the __toString() method for
+   objects implement __toString() but not \Countable
+ * fixed JS escaping for unicode characters with higher code points
+ * added error message when calling `parent()` in a block that doesn't exist in the parent template
+
+* 2.2.0 (2017-02-26)
+
+ * added a PSR-11 compatible runtime loader
+ * added `side` argument to `trim` to allow left or right trimming only.
+
+* 2.1.0 (2017-01-11)
+
+ * fixed twig_get_attribute()
+ * added Twig_NodeCaptureInterface for nodes that capture all output
+
+* 2.0.0 (2017-01-05)
+
+ * removed the C extension
+ * moved Twig_Environment::getAttribute() to twig_get_attribute()
+ * removed Twig_Environment::getLexer(), Twig_Environment::getParser(), Twig_Environment::getCompiler()
+ * removed Twig_Compiler::getFilename()
+ * added hasser support in Twig_Template::getAttribute()
+ * sped up the json_encode filter
+ * removed reserved macro names; all names can be used as macro
+ * removed Twig_Template::getEnvironment()
+ * changed _self variable to return the current template name
+ * made the loader a required argument of Twig_Environment constructor
+ * removed Twig_Environment::clearTemplateCache()
+ * removed Twig_Autoloader (use Composer instead)
+ * removed `true` as an equivalent to `html` for the auto-escaping strategy
+ * removed pre-1.8 autoescape tag syntax
+ * dropped support for PHP 5.x
+ * removed the ability to register a global variable after the runtime or the extensions have been initialized
+ * improved the performance of the filesystem loader
+ * removed features that were deprecated in 1.x
+
+* 1.37.1 (2019-XX-XX)
+
+ * fixed regression (key exists check for non ArrayObject objects)
+ * fixed logic in TemplateWrapper
+
+* 1.37.0 (2019-01-14)
+
+ * fixed ArrayObject access with a null value
+ * fixed embedded templates starting with a BOM
+ * fixed using a Twig_TemplateWrapper instance as an argument to extends
+ * switched generated code to use the PHP short array notation
+ * dropped PHP 5.3 support
+ * fixed float representation in compiled templates
+ * added a second argument to the join filter (last separator configuration)
+
+* 1.36.0 (2018-12-16)
+
+ * made sure twig_include returns a string
+ * fixed multi-byte UFT-8 in escape('html_attr')
+ * added the "deprecated" tag
+ * added support for dynamically named tests
+ * fixed GlobalsInterface extended class
+ * fixed filesystem loader throwing an exception instead of returning false
+
 * 1.35.4 (2018-07-13)
 
  * ensured that syntax errors are triggered with the right line

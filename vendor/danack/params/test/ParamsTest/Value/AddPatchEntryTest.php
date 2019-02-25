@@ -9,8 +9,14 @@ use Params\Value\MultipleEnums;
 use Params\Value\AddPatchEntry;
 use Params\Exception\LogicException;
 
+/**
+ * @coversNothing
+ */
 class AddPatchEntryTest extends BaseTestCase
 {
+    /**
+     * @covers \Params\Value\AddPatchEntry
+     */
     public function testFoo()
     {
         $path = '/a/b/c';

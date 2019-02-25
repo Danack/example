@@ -15,17 +15,15 @@
  * <pre>
  *   {% import 'forms.html' as forms %}
  * </pre>
- *
- * @final
  */
-class Twig_TokenParser_Import extends Twig_TokenParser
+final class Twig_TokenParser_Import extends Twig_TokenParser
 {
     public function parse(Twig_Token $token)
     {
         $macro = $this->parser->getExpressionParser()->parseExpression();
         $this->parser->getStream()->expect('as');
-        $var = new Twig_Node_Expression_AssignName($this->parser->getStream()->expect(Twig_Token::NAME_TYPE)->getValue(), $token->getLine());
-        $this->parser->getStream()->expect(Twig_Token::BLOCK_END_TYPE);
+        $var = new Twig_Node_Expression_AssignName($this->parser->getStream()->expect(/* Twig_Token::NAME_TYPE */ 5)->getValue(), $token->getLine());
+        $this->parser->getStream()->expect(/* Twig_Token::BLOCK_END_TYPE */ 3);
 
         $this->parser->addImportedSymbol('template', $var->getAttribute('name'));
 

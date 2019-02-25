@@ -3,17 +3,14 @@
 declare (strict_types = 1);
 
 
+
 /**
  * This file contains factory functions that create objects from either
  * configuration values, user input or other external data.
- *
  */
-
+use Auryn\Injector;
 use Example\Config;
-use Danack\Response\StubResponse;
 use Psr\Http\Message\ResponseInterface;
-use Danack\SlimAurynInvoker\SlimAurynInvokerFactory;
-use Danack\Response\StubResponseMapper;
 
 /**
  * @return \Monolog\Logger
@@ -86,205 +83,26 @@ function createRedis()
     return $redis;
 }
 
-
-
 function forbidden(\Auryn\Injector $injector)
 {
     $injector->make("Please don't use this object directly; create a more specific type to use.");
 }
 
-function createAppForApi(\Slim\Container $container, \Auryn\Injector $injector)
-{
-    $app = new \Slim\App($container);
 
-    $settings = $container->get('settings');
-    $settings->replace([
-        'determineRouteBeforeAppMiddleware' => true,
-    ]);
-
-    $resultMappers = [
-        StubResponse::class => [StubResponseMapper::class, 'mapToPsr7Response'],
-        Example\Response\Response::class => 'exampleResponseMapper',
-        ResponseInterface::class => function (
-            ResponseInterface $controllerResult,
-            ResponseInterface $originalResponse
-        ) {
-            return $controllerResult;
-        }
-    ];
-
-    $exceptionHandlers = [
-        \Params\Exception\ValidationException::class => 'paramsValidationExceptionMapper',
-        \PDOException::class => 'pdoExceptionMapper',
-        \Example\Exception\DebuggingCaughtException::class => 'debuggingCaughtExceptionExceptionMapper'
-    ];
-
-//    $airbrakeWrapper = $injector->make(\Example\Service\ExceptionNotifierWrapper::class);
-
-//    $wrappedExceptionHandlers = [];
-//    foreach ($exceptionHandlers as $exceptionType => $exceptionHandler) {
-//        $wrappedExceptionHandlers[$exceptionType] = $airbrakeWrapper->wrapExceptionMapper($exceptionHandler);
-//    }
-
-    $container['foundHandler'] = new SlimAurynInvokerFactory(
-        $injector,
-        $resultMappers,
-        'setupSlimAurynInvoker',
-        $exceptionHandlers
-    );
-
-    // TODO - this shouldn't be used in production.
-    // TODO - convert to JSON response
-    $container['notFoundHandler'] = function ($c) {
-        return new \Example\SlimNotFoundHandler($c);
-    };
-
-    $app->add($injector->make(\Example\Middleware\AllowAllCors::class));
-
-    // TODO - this shouldn't be used in production.
-    // TODO - convert to JSON response
-
-    // TODO - re-enable this
-//    $exceptionNotifier = $injector->make(\Example\Service\ExceptionNotifier\ExceptionNotifier::class);
-//
-//    $container['errorHandler'] = function ($c) use ($exceptionNotifier) {
-//        return new \Example\SlimErrorHandler($c, $exceptionNotifier);
-//    };
-
-    $routes = $injector->make(\Example\Route\Routes::class);
-    $container['router'] = new \Example\ExampleRouter($routes, $injector, $container);
-
-    return $app;
-}
-
-
-
-function createAppForSite(\Slim\Container $container, \Auryn\Injector $injector)
-{
-    $resultMappers = [
-        StubResponse::class => [StubResponseMapper::class, 'mapToPsr7Response'],
-        Example\Response\Response::class => 'exampleResponseMapper',
-        ResponseInterface::class => function (
-            ResponseInterface $controllerResult,
-            ResponseInterface $originalResponse
-        ) {
-            return $controllerResult;
-        }
-    ];
-
-    $exceptionHandlers = [
-        \Params\Exception\ValidationException::class => 'paramsValidationExceptionMapper'
-    ];
-
-    $container['foundHandler'] = new SlimAurynInvokerFactory(
-        $injector,
-        $resultMappers,
-        'setupSlimAurynInvoker',
-        $exceptionHandlers
-    );
-
-    $app = new \Slim\App($container);
-
-    // TODO - this shouldn't be used in production.
-    $container['errorHandler'] = function ($c) {
-        return function ($request, $response, $exception) use ($c) {
-            /** @var \Throwable $exception */
-            $text = "";
-            do {
-                $text .= $exception->getMessage() . "<br/><br/>\n\n";
-                $text .= str_replace("#", "<br/>#", nl2br($exception->getTraceAsString())). "<br/><br/>\n\n";
-            } while (($exception = $exception->getPrevious()) !== null);
-
-
-            error_log($text);
-            return $c['response']->withStatus(500)
-                ->withHeader('Content-Type', 'text/html')
-                ->write($text);
-        };
-    };
-
-    $container['phpErrorHandler'] = function ($container) {
-        return $container['errorHandler'];
-    };
-
-
-    $routes = $injector->make(\Example\Route\Routes::class);
-    $container['router'] = new \Example\ExampleRouter($routes, $injector, $container);
-
-    return $app;
-}
-
-
-function createAppForAdmin(\Slim\Container $container, \Auryn\Injector $injector)
-{
-    $resultMappers = [
-        StubResponse::class => [StubResponseMapper::class, 'mapToPsr7Response'],
-        Example\Response\Response::class => 'exampleResponseMapper',
-        ResponseInterface::class => function (
-            ResponseInterface $controllerResult,
-            ResponseInterface $originalResponse
-        ) {
-            return $controllerResult;
-        }
-    ];
-
-    $exceptionHandlers = [
-        \Params\Exception\ValidationException::class => 'paramsValidationExceptionMapper'
-    ];
-
-    $container['foundHandler'] = new SlimAurynInvokerFactory(
-        $injector,
-        $resultMappers,
-        'setupSlimAurynInvoker',
-        $exceptionHandlers
-    );
-
-    $app = new \Slim\App($container);
-
-    // TODO - this shouldn't be used in production.
-    $container['errorHandler'] = function ($c) {
-        return function ($request, $response, $exception) use ($c) {
-            /** @var \Throwable $exception */
-            $text = "";
-            do {
-                $text .= $exception->getMessage() . "<br/><br/>\n\n";
-                $text .= str_replace("#", "<br/>#", nl2br($exception->getTraceAsString())). "<br/><br/>\n\n";
-            } while (($exception = $exception->getPrevious()) !== null);
-
-
-            error_log($text);
-            return $c['response']->withStatus(500)
-                ->withHeader('Content-Type', 'text/html')
-                ->write($text);
-        };
-    };
-
-    $container['phpErrorHandler'] = function ($container) {
-        return $container['errorHandler'];
-    };
-
-
-    $routes = $injector->make(\Example\Route\Routes::class);
-    $container['router'] = new \Example\ExampleRouter($routes, $injector, $container);
-
-    return $app;
-}
-
-
-
-function createTwigForSite(\Auryn\Injector $injector)
+function createTwigForSite(\Auryn\Injector $injector, Config $config)
 {
     // The templates are included in order of priority.
     $templatePaths = [
         __DIR__ . '/../app/template'
     ];
 
+    $twigConfig = $config->getTwigConfig();
 
     $loader = new Twig_Loader_Filesystem($templatePaths);
     $twig = new Twig_Environment($loader, array(
-        'cache' => false,
+        'cache' => $twigConfig->isCache(),
         'strict_variables' => true,
-        'debug' => true // TODO - needs config
+        'debug' => $twigConfig->isDebug()
     ));
 
     // Inject function - allows DI in templates.
@@ -295,17 +113,6 @@ function createTwigForSite(\Auryn\Injector $injector)
 
 
     $rawParams = ['is_safe' => array('html')];
-
-    $twigFunctions = [
-//        'memory_debug'
-    ];
-
-    foreach ($twigFunctions as $functionName => $callable) {
-        $function = new Twig_SimpleFunction($functionName, function () use ($injector, $callable) {
-            return $injector->execute($callable);
-        });
-        $twig->addFunction($function);
-    }
 
     $rawTwigFunctions = [
         'memory_debug' => 'memory_debug',
@@ -323,19 +130,20 @@ function createTwigForSite(\Auryn\Injector $injector)
 
 
 
-function createTwigForAdmin(\Auryn\Injector $injector)
+function createTwigForAdmin(\Auryn\Injector $injector, Config $config)
 {
+    $twigConfig = $config->getTwigConfig();
+
     // The templates are included in order of priority.
     $templatePaths = [
         __DIR__ . '/../admin/template'
     ];
 
-
     $loader = new Twig_Loader_Filesystem($templatePaths);
     $twig = new Twig_Environment($loader, array(
-        'cache' => false,
+        'cache' => $twigConfig->isCache(),
         'strict_variables' => true,
-        'debug' => true // TODO - needs config
+        'debug' => $twigConfig->isDebug()
     ));
 
     // Inject function - allows DI in templates.
@@ -346,18 +154,6 @@ function createTwigForAdmin(\Auryn\Injector $injector)
 
 
     $rawParams = ['is_safe' => array('html')];
-
-    $twigFunctions = [
-//        'memory_debug'
-    ];
-
-    foreach ($twigFunctions as $functionName => $callable) {
-        $function = new Twig_SimpleFunction($functionName, function () use ($injector, $callable) {
-            return $injector->execute($callable);
-        });
-        $twig->addFunction($function);
-    }
-
     $rawTwigFunctions = [
         'memory_debug' => 'memory_debug',
     ];
@@ -409,10 +205,199 @@ function createPdfGeneratorFromConfig() : \Example\CliController\PdfGenerator
     );
 }
 
-
 function createFileInvoiceLocalStorage()
 {
     $path = __DIR__ . '/../var/files_invoice';
 
     return new \Example\Service\LocalStorage\InvoiceLocalStorage\FileInvoiceLocalStorage($path);
+}
+
+function createRoutesForApp()
+{
+    return new \SlimAuryn\Routes(__DIR__ . '/../routes/app_routes.php');
+}
+
+function createRoutesForAdmin()
+{
+    return new \SlimAuryn\Routes(__DIR__ . '/../routes/admin_routes.php');
+}
+
+function createRoutesForApi()
+{
+    return new \SlimAuryn\Routes(__DIR__ . '/../routes/api_routes.php');
+}
+
+function getExceptionHandlersForApi()
+{
+    $exceptionHandlers = [
+        \Params\Exception\ValidationException::class => 'paramsValidationExceptionMapper',
+        \PDOException::class => 'pdoExceptionMapper',
+        \Example\Exception\DebuggingCaughtException::class => 'debuggingCaughtExceptionExceptionMapper'
+    ];
+
+    return $exceptionHandlers;
+}
+
+function createExceptionMiddlewareForApp(\Auryn\Injector $injector)
+{
+    $exceptionHandlers = [
+        \Params\Exception\ValidationException::class => 'paramsValidationExceptionMapper'
+    ];
+
+    $resultMappers = getResultMappers($injector);
+
+    return new \SlimAuryn\ExceptionMiddleware(
+        $exceptionHandlers,
+        $resultMappers
+    );
+}
+
+function getResultMappers(\Auryn\Injector $injector)
+{
+//    $twigResponseMapper = $injector->make(\SlimAuryn\ResponseMapper\TwigResponseMapper::class);
+
+    $twigResponseMapperFn = function (
+        \SlimAuryn\Response\TwigResponse $twigResponse,
+        ResponseInterface $originalResponse
+    ) use ($injector) {
+        $twigResponseMapper = $injector->make(\SlimAuryn\ResponseMapper\TwigResponseMapper::class);
+
+        return $twigResponseMapper($twigResponse, $originalResponse);
+    };
+
+    return [
+        \SlimAuryn\Response\StubResponse::class => 'SlimAuryn\ResponseMapper\ResponseMapper::mapStubResponseToPsr7',
+        Example\Response\Response::class => 'exampleResponseMapper',
+        ResponseInterface::class => 'SlimAuryn\ResponseMapper::passThroughResponse',
+        'string' => 'convertStringToHtmlResponse',
+        \SlimAuryn\Response\TwigResponse::class => $twigResponseMapperFn
+    ];
+}
+
+function createExceptionMiddleware(\Auryn\Injector $injector)
+{
+    return new SlimAuryn\ExceptionMiddleware(
+        getExceptionMappers(),
+        getResultMappers($injector)
+    );
+}
+
+function createSlimAurynInvokerFactory(
+    \Auryn\Injector $injector,
+    \SlimAuryn\RouteMiddlewares $routeMiddlewares
+) {
+    $resultMappers = getResultMappers($injector);
+
+    return new SlimAuryn\SlimAurynInvokerFactory(
+        $injector,
+        $routeMiddlewares,
+        $resultMappers
+    );
+}
+
+
+
+
+
+
+function createSlimAppForApp(Injector $injector, \Slim\Container $container)
+{
+    // quality code.
+    $container['foundHandler'] = $injector->make(\SlimAuryn\SlimAurynInvokerFactory::class);
+
+    // TODO - this shouldn't be used in production.
+    $container['errorHandler'] = 'appErrorHandler';
+
+    $container['phpErrorHandler'] = function ($container) {
+        return $container['errorHandler'];
+    };
+
+    $app = new \Slim\App($container);
+
+    $app->add($injector->make(\SlimAuryn\ExceptionMiddleware::class));
+//    $app->add($injector->make(\Osf\Middleware\ContentSecurityPolicyMiddleware::class));
+////    $app->add($injector->make(\Osf\Middleware\BadHeaderMiddleware::class));
+//    $app->add($injector->make(\Osf\Middleware\AllowedAccessMiddleware::class));
+//    $app->add($injector->make(\Osf\Middleware\MemoryCheckMiddleware::class));
+
+    return $app;
+}
+
+
+
+function createAppForApi(\Slim\Container $container, \Auryn\Injector $injector)
+{
+    $app = new \Slim\App($container);
+
+    // TODO - this shouldn't be used in production.
+    // TODO - convert to JSON response
+    $container['notFoundHandler'] = function ($c) {
+        return new \Example\SlimNotFoundHandler($c);
+    };
+
+    $app->add($injector->make(\Example\Middleware\AllowAllCors::class));
+
+    return $app;
+}
+
+function createAppForSite(\Slim\Container $container, \Auryn\Injector $injector)
+{
+    $app = new \Slim\App($container);
+
+    // TODO - this shouldn't be used in production.
+    $container['errorHandler'] =  'getAppErrorHandler';
+
+    $container['phpErrorHandler'] = function ($container) {
+        return $container['errorHandler'];
+    };
+
+    return $app;
+}
+
+function createAppForAdmin(\Slim\Container $container, \Auryn\Injector $injector)
+{
+    $app = new \Slim\App($container);
+
+    // TODO - this shouldn't be used in production.
+    $container['errorHandler'] = 'getAppErrorHandler';
+
+    $container['phpErrorHandler'] = function ($container) {
+        return $container['errorHandler'];
+    };
+
+    return $app;
+}
+
+function createSlimAppForAdmin(Injector $injector, \Slim\Container $container)
+{
+    // quality code.
+    $container['foundHandler'] = $injector->make(\SlimAuryn\SlimAurynInvokerFactory::class);
+
+    // TODO - this shouldn't be used in production.
+    $container['errorHandler'] = 'appErrorHandler';
+
+    $container['phpErrorHandler'] = function ($container) {
+        return $container['errorHandler'];
+    };
+
+    $app = new \Slim\App($container);
+    $app->add($injector->make(\SlimAuryn\ExceptionMiddleware::class));
+
+    return $app;
+}
+
+
+
+function createSlimContainer()
+{
+    $container = new \Slim\Container();
+
+    // If there is a global request object, which
+    global $request;
+
+    if (isset($request) && $request !== null) {
+        $container['request'] = $request;
+    }
+
+    return $container;
 }

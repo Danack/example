@@ -72,7 +72,7 @@ class Params
     /**
      * @param string $classname
      * @param array $namedRules
-     * @return mixed
+     * @return mixed -  [object|null, ValidationErrors|null]
      * @throws Exception\ParamsException
      * @throws ValidationException
      */
@@ -84,9 +84,9 @@ class Params
             $params[] = $validator->validate($name, $rules);
         }
 
-        $errors = $validator->getValidationProblems();
-        if (count($errors) !== 0) {
-            return [null, $errors];
+        $validationErrors = $validator->getValidationProblems();
+        if ($validationErrors !== null) {
+            return [null, $validationErrors];
         }
 
         $reflection_class = new \ReflectionClass($classname);

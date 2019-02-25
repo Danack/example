@@ -60,7 +60,7 @@ interface ParamDescription
     const FORMAT_BINARY     = "binary";      // string	binary	any sequence of octets
     const FORMAT_BOOLEAN    = "boolean"; //	boolean
     const FORMAT_DATE       = "date";    // string	date	As defined by full-date - RFC3339
-    const FORMAT_DATETIME   = "dateTime"; // string	date-time	As defined by date-time - RFC3339
+    const FORMAT_DATETIME   = "date-time"; // string	date-time	As defined by date-time - RFC3339
     const FORMAT_PASSWORD   = "password"; // string	password	Used to hint UIs the input needs to be obscured.
     // string	The extending format for the previously mentioned type. See
     // Data Type Formats for further details.
@@ -130,7 +130,7 @@ interface ParamDescription
     // integer	See https://tools.ietf.org/html/draft-fge-json-schema-validation-00#section-5.3.3.
     public function setMinItems(int $minItems);
 
-    public function setNotNull();
+    public function setNullAllowed();
 
     // boolean	See https://tools.ietf.org/html/draft-fge-json-schema-validation-00#section-5.3.4.
     public function setUniqueItems(bool $uniqueItems);

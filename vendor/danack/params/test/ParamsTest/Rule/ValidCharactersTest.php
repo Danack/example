@@ -6,7 +6,12 @@ namespace ParamsTest\Rule;
 
 use ParamsTest\BaseTestCase;
 use Params\Rule\ValidCharacters;
+use Params\Rule\SaneCharacters;
 
+/**
+ * @group wip
+ * @coversNothing
+ */
 class ValidCharactersTest extends BaseTestCase
 {
     public function provideTestCases()
@@ -15,6 +20,8 @@ class ValidCharactersTest extends BaseTestCase
             ['a-zA-Z', 'john', null],
             ['a-zA-Z', 'johnny-5', 6],  // bad digit and hyphen
             ['a-zA-Z', 'jo  hn', 2], // bad space
+
+            [implode(SaneCharacters::ALLOWED_CHAR_TYPES), "jo.hn", null], //punctuation is not letter or number
         ];
     }
 
@@ -27,7 +34,7 @@ class ValidCharactersTest extends BaseTestCase
         $validator = new ValidCharacters($validCharactersPattern);
         $validationResult = $validator('foo', $testValue);
         if ($expectedErrorPosition !== null) {
-            $this->assertNotNull($validationResult->getProblemMessage());
+            $this->assertNotNull($validationResult->getProblemMessage(), "Failed to detect invalid char at $expectedErrorPosition");
             $this->assertContains((string)$expectedErrorPosition, $validationResult->getProblemMessage());
             $this->assertContains($validCharactersPattern, $validationResult->getProblemMessage());
         }
@@ -35,4 +42,8 @@ class ValidCharactersTest extends BaseTestCase
             $this->assertNull($validationResult->getProblemMessage());
         }
     }
+
+
+
+
 }

@@ -8,6 +8,9 @@ use Params\Value\MultipleEnums;
 use ParamsTest\BaseTestCase;
 use Params\Rule\MultipleEnum;
 
+/**
+ * @coversNothing
+ */
 class CheckFilterSetTest extends BaseTestCase
 {
     public function providesKnownFilterCorrect()

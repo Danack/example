@@ -8,21 +8,40 @@ use ParamsTest\BaseTestCase;
 use Params\Value\TestPatchEntry;
 use Params\Exception\LogicException;
 
+/**
+ * @coversNothing
+ */
 class TestPatchEntryTest extends BaseTestCase
 {
+    /**
+     * @covers \Params\Value\TestPatchEntry
+     */
     public function testFoo()
     {
         $path = '/a/b/c';
         $value = 5;
 
-        $replacePatch = new TestPatchEntry($path, $value);
+        $patch = new TestPatchEntry($path, $value);
 
-        $this->assertEquals($path, $replacePatch->getPath());
-        $this->assertEquals($value, $replacePatch->getValue());
+        $this->assertEquals($path, $patch->getPath());
+        $this->assertEquals($value, $patch->getValue());
 
-        $this->assertEquals(TestPatchEntry::TEST, $replacePatch->getOp());
+        $this->assertEquals(TestPatchEntry::TEST, $patch->getOp());
 
         $this->expectException(LogicException::class);
-        $replacePatch->getFrom();
+        $patch->getFrom();
+
+        $this->assertEquals('test', $patch->getOp());
+    }
+
+
+    /**
+     * @covers \Params\Value\TestPatchEntry::getFrom
+     */
+    public function testGetFromThrows()
+    {
+        $patch = new TestPatchEntry('/a/b/c', 5);
+        $this->expectException(\Params\Exception\LogicException::class);
+        $patch->getFrom();
     }
 }

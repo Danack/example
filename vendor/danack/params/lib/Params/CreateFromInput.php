@@ -7,6 +7,10 @@ namespace Params;
 use Params\Params;
 use VarMap\VarMap;
 
+/**
+ * Use this trait when the parameters arrive as a the complete data
+ * of a request, without names for individual parameters.
+ */
 trait CreateFromInput
 {
     /**

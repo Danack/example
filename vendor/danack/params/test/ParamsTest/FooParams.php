@@ -24,7 +24,6 @@ class FooParams
         $this->limit = $limit;
     }
 
-
     public static function getRules(VarMap $variableMap)
     {
         return [

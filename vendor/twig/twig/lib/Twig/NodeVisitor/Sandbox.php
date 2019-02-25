@@ -12,24 +12,22 @@
 /**
  * Twig_NodeVisitor_Sandbox implements sandboxing.
  *
- * @final
- *
  * @author Fabien Potencier <fabien@symfony.com>
  */
-class Twig_NodeVisitor_Sandbox extends Twig_BaseNodeVisitor
+final class Twig_NodeVisitor_Sandbox extends Twig_BaseNodeVisitor
 {
-    protected $inAModule = false;
-    protected $tags;
-    protected $filters;
-    protected $functions;
+    private $inAModule = false;
+    private $tags;
+    private $filters;
+    private $functions;
 
     protected function doEnterNode(Twig_Node $node, Twig_Environment $env)
     {
         if ($node instanceof Twig_Node_Module) {
             $this->inAModule = true;
-            $this->tags = array();
-            $this->filters = array();
-            $this->functions = array();
+            $this->tags = [];
+            $this->filters = [];
+            $this->functions = [];
 
             return $node;
         } elseif ($this->inAModule) {
@@ -67,7 +65,7 @@ class Twig_NodeVisitor_Sandbox extends Twig_BaseNodeVisitor
         if ($node instanceof Twig_Node_Module) {
             $this->inAModule = false;
 
-            $node->setNode('display_start', new Twig_Node(array(new Twig_Node_CheckSecurity($this->filters, $this->tags, $this->functions), $node->getNode('display_start'))));
+            $node->setNode('display_start', new Twig_Node([new Twig_Node_CheckSecurity($this->filters, $this->tags, $this->functions), $node->getNode('display_start')]));
         }
 
         return $node;

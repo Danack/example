@@ -7,6 +7,9 @@ namespace ParamsTest\Rule;
 use ParamsTest\BaseTestCase;
 use Params\Rule\MaxIntValue;
 
+/**
+ * @coversNothing
+ */
 class MaxIntValueValidatorTest extends BaseTestCase
 {
     public function provideMaxLengthCases()

@@ -1,9 +1,6 @@
 ``include``
 ===========
 
-.. versionadded:: 1.12
-    The ``include`` function was added in Twig 1.12.
-
 The ``include`` function returns the rendered content of a template:
 
 .. code-block:: jinja
@@ -42,13 +39,9 @@ And if the expression evaluates to a ``Twig_Template`` or a
 
     // {{ include(template) }}
 
-    // deprecated as of Twig 1.28
-    $template = $twig->loadTemplate('some_template.twig');
-
-    // as of Twig 1.28
     $template = $twig->load('some_template.twig');
 
-    $twig->display('template.twig', array('template' => $template));
+    $twig->display('template.twig', ['template' => $template]);
 
 When you set the ``ignore_missing`` flag, Twig will return an empty string if
 the template does not exist:

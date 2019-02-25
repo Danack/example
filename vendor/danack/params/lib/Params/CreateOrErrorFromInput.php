@@ -10,7 +10,7 @@ trait CreateOrErrorFromInput
 {
     /**
      * @param VarMap $variableMap
-     * @return mixed
+     * @return mixed - [object|null, ValidationErrors|null]
      * @throws \Params\Exception\RulesEmptyException
      * @throws \Params\Exception\ValidationException
      */

@@ -8,6 +8,9 @@ use VarMap\ArrayVarMap;
 use ParamsTest\BaseTestCase;
 use Params\Rule\GetString;
 
+/**
+ * @coversNothing
+ */
 class GetStringTest extends BaseTestCase
 {
     /**

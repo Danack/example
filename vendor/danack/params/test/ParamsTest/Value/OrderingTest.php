@@ -8,8 +8,15 @@ use ParamsTest\BaseTestCase;
 use Params\Value\OrderElement;
 use Params\Value\Ordering;
 
+/**
+ * @coversNothing
+ */
 class OrderingTest extends BaseTestCase
 {
+    /**
+     * @covers \Params\Value\OrderElement
+     * @covers \Params\Value\Ordering
+     */
     public function testBasic()
     {
         $name = 'foo';

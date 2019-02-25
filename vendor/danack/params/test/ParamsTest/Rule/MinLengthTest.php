@@ -7,6 +7,9 @@ namespace ParamsTest\Rule;
 use ParamsTest\BaseTestCase;
 use Params\Rule\MinLength;
 
+/**
+ * @coversNothing
+ */
 class MinLengthTest extends BaseTestCase
 {
     public function provideMaxLengthCases()

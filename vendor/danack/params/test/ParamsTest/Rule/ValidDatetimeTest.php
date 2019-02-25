@@ -7,9 +7,11 @@ namespace ParamsTest\Rule;
 use ParamsTest\BaseTestCase;
 use Params\Rule\ValidDatetime;
 
+/**
+ * @coversNothing
+ */
 class ValidDatetimeTest extends BaseTestCase
 {
-
     public function provideTestWorksCases()
     {
         return [

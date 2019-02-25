@@ -8,6 +8,9 @@ use ParamsTest\BaseTestCase;
 use Params\Rule\Order;
 use Params\Value\Ordering;
 
+/**
+ * @coversNothing
+ */
 class OrderTest extends BaseTestCase
 {
     public function provideTestCases()
