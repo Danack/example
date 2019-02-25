@@ -1,0 +1,30 @@
+language: php
+
+sudo: false
+
+php:
+  - 7.1
+  - 7.2
+  - 7.3
+
+
+before_install:
+  - docker -v
+  # Stop the postgres instance travis sets up automatically
+  # Create a loopback address
+  - sudo ip addr add 10.254.254.254/32 dev lo
+
+install:
+  # Start the docker stuff
+  - docker-compose build
+  - docker-compose up -d
+  - sleep 10
+  - composer install
+
+script:
+  - php vendor/bin/phpcs --standard=./test/codesniffer.xml --encoding=utf-8 --extensions=php -p -s lib
+  - php vendor/bin/phpunit -c test/phpunit.xml
+  - docker-compose exec -T php_fpm sh -c "sh runAllTests.sh"
+
+notifications:
+  email: false

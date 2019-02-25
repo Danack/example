@@ -1,0 +1,24 @@
+version: "3"
+services:
+  php_fpm:
+    build: docker/php_fpm
+    image: slimauryn_php_fpm
+    volumes:
+      - .:/var/app
+  php_fpm_debug:
+    build: docker/php_fpm_debug
+    depends_on:
+      - php_fpm
+    volumes:
+      - .:/var/app
+  nginx:
+    build: docker/nginx
+    depends_on:
+      - php_fpm
+      - php_fpm_debug
+    volumes:
+      - .:/var/app
+    ports:
+      - "80:80"
+      - "8000:8000"
+      - "8001:8001"

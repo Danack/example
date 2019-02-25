@@ -1,0 +1,12 @@
+parameters:
+  bootstrap: null
+  autoload_files:
+    - example/factories.php
+    - example/functions.php
+    - example/injectionParams.php
+    - example/routes.php
+  excludes_analyse:
+  ignoreErrors:
+
+
+
