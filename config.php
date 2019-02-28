@@ -24,7 +24,6 @@ $options['example']['redis'] = [
 // production in staging
 // 'develop' in develop
 // local in local
-
 $options['example']['env'] = 'local';
 
 

@@ -76,7 +76,6 @@
       <path value="$PROJECT_DIR$/vendor/danack/var-map" />
       <path value="$PROJECT_DIR$/vendor/danack/aurynconfig" />
       <path value="$PROJECT_DIR$/vendor/danack/console" />
-      <path value="$PROJECT_DIR$/vendor/danack/slim-auryn-invoker" />
       <path value="$PROJECT_DIR$/vendor/google/recaptcha" />
       <path value="$PROJECT_DIR$/vendor/twilio/sdk" />
       <path value="$PROJECT_DIR$/vendor/instaclick/php-webdriver" />
@@ -119,6 +118,7 @@
       <path value="$PROJECT_DIR$/vendor/danack/imagick-contained" />
       <path value="$PROJECT_DIR$/vendor/symfony/contracts" />
       <path value="$PROJECT_DIR$/vendor/ralouphie/getallheaders" />
+      <path value="$PROJECT_DIR$/vendor/danack/slim-auryn-invoker" />
     </include_path>
   </component>
   <component name="PhpProjectServersManager">

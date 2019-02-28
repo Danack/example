@@ -15,7 +15,6 @@ function injectionParams() : InjectionParams
     // Alias interfaces (or classes) to the actual types that should be used
     // where they are required.
     $aliases = [
-        //\VarMap\VarMap::class => \VarMap\Psr7InputMapWithVarMap::class,
         \VarMap\VarMap::class => \Example\Psr7InputMapWithRouteParams::class,
         \Params\Input::class => \Example\Psr7Input::class,
 

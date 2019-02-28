@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Example;
 
+use Example\Config\RedisConfig;
 use Example\Config\TwigConfig;
 
 class Config
@@ -39,6 +40,17 @@ class Config
         foreach ($constants as $constant) {
             $value = getConfig($constant);
         }
+    }
+
+    public static function getRedisConfig(): RedisConfig
+    {
+        $redisInfo = getConfig(Config::EXAMPLE_REDIS_INFO);
+
+        return new RedisConfig(
+            $redisInfo['host'],
+            $redisInfo['port'],
+            $redisInfo['password']
+        );
     }
 
     public function getTwigConfig() : TwigConfig

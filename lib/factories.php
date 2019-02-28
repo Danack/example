@@ -73,11 +73,10 @@ function createPDO()
  */
 function createRedis()
 {
-    $redisInfo = getConfig(Config::EXAMPLE_REDIS_INFO);
-
+    $redisConfig = Config::getRedisConfig();
     $redis = new Redis();
-    $redis->connect($redisInfo['host'], $redisInfo['port']);
-    $redis->auth($redisInfo['password']);
+    $redis->connect($redisConfig->getHost(), $redisConfig->getPort());
+    $redis->auth($redisConfig->getPassword());
     $redis->ping();
 
     return $redis;
@@ -254,8 +253,6 @@ function createExceptionMiddlewareForApp(\Auryn\Injector $injector)
 
 function getResultMappers(\Auryn\Injector $injector)
 {
-//    $twigResponseMapper = $injector->make(\SlimAuryn\ResponseMapper\TwigResponseMapper::class);
-
     $twigResponseMapperFn = function (
         \SlimAuryn\Response\TwigResponse $twigResponse,
         ResponseInterface $originalResponse

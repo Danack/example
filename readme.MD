@@ -5,12 +5,13 @@
 
 This project is an example of how to use various pieces of technology:
 
-* Xdebug
-* Behat tests
-* Docker for local development
-* Supervisord for background workers
-* Slim framework with Auryn DI - docs still to do.
+* [Xdebug](https://github.com/Danack/example/blob/master/readme_xdebug.md)
+* [Behat tests](https://github.com/Danack/example/blob/master/readme_behat.md)
+* [Docker for local development](https://github.com/Danack/example/blob/master/readme_docker.md)
+* [Supervisord for background workers](https://github.com/Danack/example/blob/master/readme_supervisord.md)
+* [Slim framework with Auryn DI](https://github.com/Danack/example/blob/master/readme_auryn_slim.md)
 * React + webpack - docs still to do.
+
 
 I'm getting all of the documentation to a basic level, before polishing each part individually. 
 
@@ -96,7 +97,6 @@ You can bash into a running box with:
 docker exec -it example_web_admin_1 bash
 ```
 
-
 # Top level concepts
 
 To help people understand the layout of the code of the application, here are some descriptions of top level concepts used in the project.
@@ -123,9 +123,4 @@ All of the injection parameters are in the injectionParams directory. There shou
 ## TODO
 
 * Put session support back in
-    "bryanjhv/slim-session": "^3.2",
-    "ezimuel/php-secure-session": "v1.0.1",
     
-    
-    
-    http://wordlist.aspell.net/
