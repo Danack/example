@@ -31,7 +31,7 @@ How to get this project running:
 Setting up a loopback address allows an local IP address to work both inside and outside the docker containers. It also mostly avoids the need to touch docker networking.
 
 * OSX - Copy the file ./docker/com.ralphschindler.docker_10254_alias.plist to /Library/LaunchDaemons/com.ralphschindler.docker_10254_alias.plist
-* Linux - PRs welcome!
+* Linux - run `sudo ip addr add 10.254.254.254/32 dev lo`
 * Windows - PRs welcome!
 
 You can test it is working by running `ping 10.254.254.254` on the command line.
