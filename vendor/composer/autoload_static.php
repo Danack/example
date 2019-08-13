@@ -514,6 +514,10 @@ class ComposerStaticInit20f50839b078060e5006a59fe0202351
             array (
                 0 => __DIR__ . '/..' . '/behat/behat/src',
             ),
+            'BackgroundWorkerExample\\' => 
+            array (
+                0 => __DIR__ . '/../..' . '/lib',
+            ),
         ),
         'A' => 
         array (

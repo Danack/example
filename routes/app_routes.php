@@ -28,6 +28,13 @@ return [
     ['/word_search', 'GET', 'Example\AppController\Pages::wordSearch'],
 
 
+    ['/image_queue', 'GET', 'BackgroundWorkerExample\HttpController::getFormPage'],
+    ['/image_queue', 'POST', 'BackgroundWorkerExample\HttpController::postImageRequest'],
+
+    ['/image_status', 'GET', 'BackgroundWorkerExample\HttpController::getImageStatus'],
+    ['/image/{imageFilename:.*}', 'GET', 'BackgroundWorkerExample\HttpController::getImage'],
+
+
     ['/', 'GET', 'Example\AppController\Index::get'],
 
     ['/{any:.*}', 'GET', 'Example\AppController\Index::get404'],

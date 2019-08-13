@@ -1,0 +1,44 @@
+{% extends "base.html" %}
+
+{% block page_body %}
+  <h1>Image generator</h1>
+
+
+<form method="POST" class="image_text_widget">
+
+  <table>
+    <tr>
+      <td>
+        Enter text:
+      </td>
+      <td>
+        <input type="text" name="text" id="image_text_input" />
+      </td>
+    </tr>
+
+    <tr>
+      <td></td>
+      <td>
+        <input type="submit" value="generate image" id="image_text_submit" onclick="return false;"/>
+      </td>
+    </tr>
+
+
+    <tr>
+      <td colspan="2" class="result_holder">
+      </td>
+    </tr>
+
+
+  </table>
+</form>
+
+
+
+
+
+
+
+
+
+{% endblock %}

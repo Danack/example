@@ -12,6 +12,9 @@ function add_console_commands(Application $console)
     addDebugCommands($console);
     addSetupCommands($console);
     addProcessCommands($console);
+
+
+
 }
 
 /**
@@ -46,6 +49,15 @@ function addProcessCommands(Application $console)
     $command = new Command('process:invoice_pdf_generate', 'Example\CliController\PrintUrlToPdfQueueProcessor::run');
     $command->setDescription("Listens for InvoicePDF jobs and runs them .");
     $console->add($command);
+
+
+    $command = new Command(
+        'process:image_example',
+        '\BackgroundWorkerExample\CliProcessor::processImageQueue'
+    );
+    $command->setDescription("Process the image queue.");
+    $console->add($command);
+
 }
 
 

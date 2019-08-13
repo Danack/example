@@ -20,6 +20,9 @@ if (function_exists('injectionParams') == false) {
             \Example\Service\LocalStorage\InvoiceLocalStorage\InvoiceLocalStorage::class =>
             \Example\Service\LocalStorage\InvoiceLocalStorage\FileInvoiceLocalStorage::class,
             \Example\Queue\PrintUrlToPdfQueue::class => \Example\Queue\RedisPrintUrlToPdfQueue::class,
+
+            \BackgroundWorkerExample\ImageJobRepo::class =>
+                \BackgroundWorkerExample\RedisImageJobRepo::class,
         ];
 
 

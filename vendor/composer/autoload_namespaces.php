@@ -32,5 +32,6 @@ return array(
     'Behat\\MinkExtension' => array($vendorDir . '/behat/mink-extension/src'),
     'Behat\\Gherkin' => array($vendorDir . '/behat/gherkin/src'),
     'Behat\\Behat' => array($vendorDir . '/behat/behat/src'),
+    'BackgroundWorkerExample\\' => array($baseDir . '/lib'),
     'AurynConfig' => array($vendorDir . '/danack/aurynconfig/src'),
 );

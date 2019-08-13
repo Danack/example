@@ -302,12 +302,12 @@ function createSlimAppForApp(Injector $injector, \Slim\Container $container)
     // quality code.
     $container['foundHandler'] = $injector->make(\SlimAuryn\SlimAurynInvokerFactory::class);
 
-    // TODO - this shouldn't be used in production.
-    $container['errorHandler'] = 'appErrorHandler';
-
-    $container['phpErrorHandler'] = function ($container) {
-        return $container['errorHandler'];
-    };
+//    // TODO - this shouldn't be used in production.
+//    $container['errorHandler'] = 'getAppErrorHandler';
+//
+//    $container['phpErrorHandler'] = function ($container) {
+//        return $container['errorHandler'];
+//    };
 
     $app = new \Slim\App($container);
 

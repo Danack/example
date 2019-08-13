@@ -72,6 +72,7 @@ class FileResponse implements StubResponse
             'pdf' => 'application/pdf',
             'jpg' => 'image/jpg',
             'png' => 'image/png',
+            'gif' => 'image/gif'
         ];
 
         $extension = pathinfo($filename, PATHINFO_EXTENSION);

@@ -19,6 +19,9 @@ function injectionParams()
     $aliases = [
         Example\Repo\BookListRepo\BookListRepo::class => Example\Repo\BookListRepo\DoctrineBookListRepo::class,
         Example\Repo\InvoiceRepo\InvoiceRepo::class => \Example\Repo\InvoiceRepo\FakeInvoiceRepo::class,
+        \VarMap\VarMap::class => \Example\Psr7InputMapWithRouteParams::class,
+        \BackgroundWorkerExample\ImageJobRepo::class =>
+            \BackgroundWorkerExample\RedisImageJobRepo::class,
 
         \Example\Service\LocalStorage\InvoiceLocalStorage\InvoiceLocalStorage::class =>
         \Example\Service\LocalStorage\InvoiceLocalStorage\FileInvoiceLocalStorage::class,

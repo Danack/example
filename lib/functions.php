@@ -430,7 +430,7 @@ function checkSignalsForExit()
  * @param int $sleepTime - the time to sleep between runs
  * @param int $maxRunTime - the max time to run for, before returning
  */
-function continuallyExecuteCallable($callable, int $secondsBetweenRuns, int $sleepTime, int $maxRunTime)
+function continuallyExecuteCallableWithSleep($callable, int $secondsBetweenRuns, int $sleepTime, int $maxRunTime)
 {
     $startTime = microtime(true);
     $lastRuntime = 0;
@@ -467,6 +467,36 @@ function continuallyExecuteCallable($callable, int $secondsBetweenRuns, int $sle
 
     echo "Finishing continuallyExecuteCallable\n";
 }
+
+
+/**
+ * Repeatedly calls a callable until it's time to stop
+ *
+ * @param callable $callable - the thing to run
+ * @param int $maxRunTime - the max time to run for, before returning
+ */
+function continuallyExecuteCallable($callable, int $maxRunTime)
+{
+    $startTime = microtime(true);
+
+    $finished = false;
+    echo "starting continuallyExecuteCallable \n";
+    while ($finished === false) {
+
+        $callable();
+        if (checkSignalsForExit()) {
+            break;
+        }
+
+        if ((microtime(true) - $startTime) > $maxRunTime) {
+            echo "Reach maxRunTime - finished = true\n";
+            $finished = true;
+        }
+    }
+
+    echo "Finishing continuallyExecuteCallable\n";
+}
+
 
 
 function buildInvoiceRenderLink(\Example\Model\Invoice $invoice): string

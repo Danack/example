@@ -24,7 +24,9 @@
         "twig/twig": "^2.6.2",
         "twilio/sdk": "^5.23",
         "zendframework/zend-diactoros": "^2.0.0",
-        "zendframework/zend-escaper": "^2.5"
+        "zendframework/zend-escaper": "^2.5",
+        "ext-redis": "*",
+        "ext-imagick": "*"
     },
     "require-dev": {
         "behat/behat": "^3.4",
@@ -41,7 +43,8 @@
     "autoload": {
         "files": ["lib/functions.php"],
         "psr-0": {
-            "Example\\": "lib/"
+            "Example\\": "lib/",
+            "BackgroundWorkerExample\\": "lib/"
         },
         "psr-4": {
             "Birke\\Rememberme\\": "lib/birke/rememberme/src/",
